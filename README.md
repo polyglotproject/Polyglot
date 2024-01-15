@@ -1,3 +1,3 @@
 ### Initializing...
-Nodejs package needed : Express, Ejs, Pg, Bcryptjs
+Nodejs package needed : Express, Ejs, Pg, Bcryptjs <br/>
 command to install :  npm install express ejs pg bcryptjs 
