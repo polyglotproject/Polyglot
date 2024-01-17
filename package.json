@@ -4,7 +4,7 @@
   "description": "Polyglot project",
   "main": "index.js",
   "directories": {
-    "test": "tests"
+    "test": "src/tests"
   },
   "scripts": {
     "develop": "node index.js"
