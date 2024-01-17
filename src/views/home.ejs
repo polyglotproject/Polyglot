@@ -1,10 +1,17 @@
 <%- include('header.ejs'); %>
-<div class="container">
-    <div class="row justify-content-center">
-
-        <h3>Bienvenue sur </h3> &nbsp;
-        <h3>Polyglot</h3> <br>
-
+<div class="container col-xxl-12 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="" class="d-block mx-lg-auto img-fluid" title="" alt="" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Polyglot : l'endroit des langues et du partage</h1>
+            <p class="lead">Bienvenue sur Polyglot! Inscrivez-vous si ce n'est pas encore fait.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <button type="button" class="btn btn-secondary btn-lg px-4 me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Se connecter</button>
+            </div>
+        </div>
     </div>
 </div>
 <%- include('footer.ejs'); %>
