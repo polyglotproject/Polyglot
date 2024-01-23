@@ -12,9 +12,13 @@ const connectionView = (req, res) =>{
 const inscriptionView = (req, res) =>{
     res.render("inscription", {});
 }
+const accountView = (req, res) =>{
+    res.render("account", {});
+}
 
 module.exports =  {
     homeView,
     connectionView,
-    inscriptionView
+    inscriptionView,
+    accountView
 };

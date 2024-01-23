@@ -226,9 +226,123 @@ body {
 	width:200px;
 	margin: 30px auto;
 }
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.selectors {
+  margin-top: 10px;
+}
+
+.selectors label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.close-btn {
+  margin-top: 10px;
+  cursor: pointer;
+  color: #007BFF;
+}
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.custom-checkbox input {
+  display: none;
+}
+.custom-checkbox img{
+  margin-left: 20px;
+}
+.custom-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 20px;
+
+}
+
+.custom-checkbox .checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007BFF;
+  margin-right: 10px;
+}
+
+.custom-checkbox input:checked + label .checkbox {
+  background-color: #007BFF;
+}
+
+.options-container {
+  display: flex;
+  
+}
+
+.options-group {
+  width: 45%; /* Ajustez la largeur en fonction de vos besoins */
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
 
 
+.custom-checkbox {
+  margin-bottom: 10px;
+}
 
+.custom-checkbox input {
+  display: none;
+}
+
+.custom-checkbox label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-checkbox .checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007BFF;
+  margin-right: 10px;
+}
+
+
+.custom-checkbox input:checked + label .checkbox {
+  background-color: #007BFF;
+}
+@media (max-width: 768px) {
+  .options-container{
+    flex-wrap: wrap;
+  justify-content: space-around;
+  }
+  .options-group {
+    width: 100%;
+  }
+}
+.custom-popup-class {
+  width: 60%; /* Ajustez la largeur selon vos besoins */
+}
+.custom-checkbox label:hover::after {
+  content: attr(data-country); /* Utilisation de l'attribut data-country pour afficher le nom du pays */
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  border-radius: 5px;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
     </style>
     
 
@@ -250,8 +364,9 @@ body {
               <input type="password" placeholder="Mot de passe" required>
              
               <div class="pays">
-                <a class="login">Choisie ton Pays à représenter</a>
+                <a class="login" id="popupTrigger">Choisie ton Pays à représenter</a>
               </div>
+              
               <div class="link">
                 <button type="submit" class="login">S'inscrire</button>
              
@@ -263,4 +378,112 @@ body {
             </form>
           </div>
         </div>
+        <script>
+         document.getElementById('popupTrigger').addEventListener('click', function() {
+  openPopup();
+});
+
+
+
+function openPopup() {
+  Swal.fire({
+  title: 'Choisissez votre pays à représenter',
+  customClass: {
+    popup: 'custom-popup-class',
+  },
+  color: "000",
+  html: `
+  <div class="options-container">
+      <div class="options-group">
+        <div class="custom-checkbox">
+          <input type="radio" id="image1" name="flag" value="https://flagicons.lipis.dev/flags/4x3/af.svg">
+          <label for="image1" data-country="France">
+            <span class="checkbox"></span>
+            <img src="images/france.png" alt="France" width="100">
+          </label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="radio" id="image2" name="flag" value="https://flagicons.lipis.dev/flags/4x3/al.svg">
+          <label for="image2" data-country="Angleterre">
+            <span class="checkbox"></span>
+            <img src="images/united-kingdom.png" alt="Angleterre" width="100">
+          </label>
+        </div>
+       
+      </div>
+      <div class="options-group">
+        <div class="custom-checkbox">
+          <input type="radio" id="image4" name="flag" value="path/to/image4.svg">
+          <label for="image4" data-country="Espagne">
+            <span class="checkbox"></span>
+            <img src="images/spain.png" alt="Country 4" width="100">
+          </label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="radio" id="image5" name="flag" value="path/to/image5.svg">
+          <label for="image5" data-country="Japon">
+            <span class="checkbox"></span>
+            <img src="images/japan.png" alt="Country 5" width="100">
+          </label>
+        </div>
+       
+      </div>
+      <div class="options-group">
+        <div class="custom-checkbox">
+          <input type="radio" id="image6" name="flag" value="path/to/image4.svg">
+          <label for="image6" data-country="Italie">
+            <span class="checkbox"></span>
+            <img src="images/italy.png" alt="Country 4" width="100">
+          </label>
+        </div>
+        <div class="custom-checkbox">
+          <input type="radio" id="image7" name="flag" value="path/to/image4.svg">
+          <label for="image7" data-country="Autre">
+            <span class="checkbox"></span>
+            <p style="margin-top:17.5px"> Autre </p>
+          </label>
+        </div>
+       
+      </div>
+    </div>
+    <p style="font-size:12px; margin:0;"><strong>Notes :</strong> Si vous ne vous identifiez pas à ses pays veuillez selectionner <strong>Autre</strong>.
+   
+    <br/>
+    Nous travaillons dure pour élargir les propositions de pays. Merci de votre compréhension ! </p>
+  `,
+  showCloseButton: true,
+  showConfirmButton: true,
+  confirmButtonColor: "007BFF",
+  confirmButtonText: 'Continuer mon inscription',
+}).then((result) => {
+  if (result.isConfirmed) {
+    const selectedImage = document.querySelector('input[name="flag"]:checked');
+
+    if (selectedImage) {
+      console.log("Image selected !" + selectedImage)
+    } else {
+      Swal.fire({
+        icon: 'error',
+        text: 'Vous n\'avez pas sélectionné de drapeau :(',
+        confirmButtonText: 'Réesayer',
+      }).then((result) => {
+  if (result.isConfirmed) {
+    openPopup(); // Appeler la fonction openPopup
+  }
+});
+    }
+  } else {
+    console.log(`La boîte de dialogue a été fermée ou rejetée.`);
+  }
+});
+
+
+}
+
+
+
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <%- include('footer.ejs'); %>
