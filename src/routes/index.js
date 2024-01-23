@@ -8,4 +8,9 @@ router.get('/home', homeView);
 const {connectionView} = require('../controllers/indexController');
 router.get('/connection', connectionView);
 
+
+const {inscriptionView} = require('../controllers/indexController');
+router.get('/inscription', inscriptionView);
+
+
 module.exports = router;

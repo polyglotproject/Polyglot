@@ -1,5 +1,5 @@
 <%- include('header.ejs'); %>
-<div class="container col-xxl-12 px-4 py-2">
+<div class="container col-xxl-12 px-4 py-2 ">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
             <img src="images/polyglot-club-homepage.jpeg" class="d-block mx-lg-auto img-fluid" title="" alt="" width="700" height="500" loading="lazy">
@@ -9,8 +9,12 @@
             <h1 class="display-5 fw-bold text-body-emphasis lh-sm mb-3">Polyglot  l'endroit des langues et du partage</h1>
             <p class="lead mt-3 w-75">Bienvenue sur Polyglot! Inscrivez-vous si ce n'est pas encore fait.</p>
             <div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-outline-info btn-lg px-5 me-md-2 rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button>
-                <button type="button" class="btn btn-outline-info btn-lg px-5 rounded-5" data-bs-toggle="modal" data-bs-target="#exampleModal">Se connecter</button>
+                <a href="/inscription">
+                <button type="button" class="btn btn-outline-info btn-lg px-5 me-md-2 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal">S'inscrire</button>
+            </a>
+                <a href="/connection">
+                <button type="button" class="btn btn-outline-info btn-lg px-5 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Se connecter</button>
+            </a>
             </div>
         </div>
     </div>
