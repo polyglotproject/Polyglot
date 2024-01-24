@@ -32,16 +32,17 @@ const getUsers = (request, response) => {
     );
   };
 
-const getUser = (userEmail) => {
+const getUser = (userEmail, callback) => {
     pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
         if (error) {
-            throw error;
+            callback(error, null);
         }
-        response.status(200).json(results.rows);
+        else {
+            const user = results.rows[0];
+            callback(null, user);
+        }
     });
 };
-
-  
 
   module.exports = {
     getUsers
