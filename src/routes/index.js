@@ -15,4 +15,7 @@ router.get('/inscription', inscriptionView);
 const {accountView} = require('../controllers/indexController');
 router.get('/account', accountView);
 
+const {settingsView} = require('../controllers/indexController');
+router.get('/settings', settingsView);
+
 module.exports = router;
