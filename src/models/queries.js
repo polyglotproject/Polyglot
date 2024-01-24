@@ -10,7 +10,7 @@ const pool = new Pool({
 })
 
 const getUsers = (request, response) => {
-    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
+    pool.query('SELECT * FROM Utilisateurs ORDER BY id_utilisateur ASC', (error, results) => {
       if (error) {
         throw error
       }
@@ -21,7 +21,7 @@ const getUsers = (request, response) => {
     const { nom_utilisateur, email, mot_de_passe, pays_preferee } = request.body;
 
     pool.query(
-      'INSERT INTO users (nom_utilisateur, email, mot_de_passe, pays_preferee) VALUES ($1, $2, $3, $4)',
+      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe, pays_preferee) VALUES ($1, $2, $3, $4)',
       [nom_utilisateur, email, mot_de_passe, pays_preferee],
       (error, results) => {
         if (error) {
@@ -31,6 +31,16 @@ const getUsers = (request, response) => {
       }
     );
   };
+
+const getUser = (userEmail) => {
+    pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
+        if (error) {
+            throw error;
+        }
+        response.status(200).json(results.rows);
+    });
+};
+
   
 
   module.exports = {
