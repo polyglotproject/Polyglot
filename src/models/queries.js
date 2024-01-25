@@ -44,8 +44,47 @@ const getUser = (userEmail, callback) => {
     });
 };
 
+const addSalon = (channelData, callback) => {
+  const { nom } = channelData;
+  pool.query('INSERT INTO Salons (nom) VALUES ($1) RETURNING *', [nom], (error, results) => {
+      callback(error, results.rows[0]);
+  });
+};
+
+const getSalonByID = (id_salon, callback) => {
+  pool.query('SELECT * FROM Salons WHERE id = $1', [id_salon], (error, results) => {
+      callback(error, results.rows[0]);
+  });
+};
+
+const deleteMessage = (messageId, callback) => {
+  pool.query('DELETE FROM Messages WHERE id = $1', [messageId], (error, results) => {
+      callback(error, results.rowCount);
+  });
+};
+
+const addMessage = (messageData, callback) => {
+  const { salon_id, utilisateur_id, contenu } = messageData;
+  pool.query('INSERT INTO Messages (salon_id, utilisateur_id, contenu) VALUES ($1, $2, $3) RETURNING *',
+      [salon_id, utilisateur_id, contenu],
+      (error, results) => {
+          callback(error, results.rows[0]);
+      });
+};
+
+const getMessagesBySalon= (id_salon, callback) => {
+  pool.query('SELECT * FROM Messages WHERE salon_id = $1', [id_salon], (error, results) => {
+      callback(error, results.rows);
+  });
+};
+
 module.exports = {
   getUsers,
   getUser,
-  AddUser
+  AddUser,
+  addSalon,
+  getSalonByID,
+  addMessage,
+  deleteMessage,
+  getMessagesBySalon
 }
