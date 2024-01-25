@@ -15,7 +15,12 @@ const settingsView = (req, res) =>{
     res.render("settings", {});
 }
 
+const profileView = (req, res) =>{
+    res.render("profile", {});
+}
+
 module.exports =  {
     accountView,
-    settingsView
+    settingsView,
+    profileView
 };
