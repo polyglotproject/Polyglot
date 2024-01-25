@@ -78,6 +78,18 @@ const getMessagesBySalon= (id_salon, callback) => {
   });
 };
 
+const getAllCountries = (callback) => {
+  pool.query('SELECT * FROM Pays', (error, results) => {
+      callback(error, results.rows);
+  });
+};
+
+const getCountryByNom = (countryId, callback) => {
+  pool.query('SELECT * FROM Pays WHERE nom_pays = $1', [countryId], (error, results) => {
+      callback(error, results.rows[0]);
+  });
+};
+
 module.exports = {
   getUsers,
   getUser,
@@ -86,5 +98,7 @@ module.exports = {
   getSalonByID,
   addMessage,
   deleteMessage,
-  getMessagesBySalon
+  getMessagesBySalon,
+  getAllCountries,
+  getCountryByNom
 }
