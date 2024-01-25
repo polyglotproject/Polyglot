@@ -44,6 +44,8 @@ const getUser = (userEmail, callback) => {
     });
 };
 
-  module.exports = {
-    getUsers
-  }
+module.exports = {
+  getUsers,
+  getUser,
+  AddUser
+}
