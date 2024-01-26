@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
 
@@ -19,17 +20,33 @@ const {homeView} = require("./src/controllers/indexController");
 const {router} = require("express/lib/application");
 app.get('/users', db.getUsers);
 
+app.use(session({
+    secret: "&4$r1(_&@+*swk_c=&^nwfgw4optf=^o9lvd&@%^@@=04&!$",
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.post("/signIn/register", (req, res) => {
-    res.json({requestBody: req.body});  // <==== req.body will be a parsed JSON object
+    const { user, email, password, flag } = req.body;
     console.log(req.body);
     db.AddUser(req,res);
-    res.redirect('/profile')
+    req.session.userEmail = email;
+    res.redirect('/account')
 })
 
 app.get('/', (req, res) => {
     res.redirect('/home');
 });
 
+app.get('/account', async (req, res) => {
+    try {
+        const user = await db.getUser(req.session.userEmail);
+        res.render('account', {user});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
 
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
