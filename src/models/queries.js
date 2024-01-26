@@ -4,8 +4,8 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
-  database: 'postgres',
-  password: '123',
+  database: 'polyglot',
+  password: 'butinfo',
   port: 5432,
 })
 
@@ -21,26 +21,26 @@ const getUsers = (request, response) => {
     const { user, email, password, flag } = request.body;
 
     pool.query(
-      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe, pays_preferee) VALUES ($1, $2, $3, $4)',
+      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, pays_preferee) VALUES ($1, $2, $3, $4)',
       [user, email, password, flag],
       (error, results) => {
         if (error) {
           throw error;
         }
-        response.status(200).json(results.rows);
       }
     );
   };
 
-const getUser = (userEmail, callback) => {
-    pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
-        if (error) {
-            callback(error, null);
-        }
-        else {
-            const user = results.rows[0];
-            callback(null, user);
-        }
+const getUser = (userEmail) => {
+    return new Promise((resolve, reject) => {
+        pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                const user = results.rows[0];
+                resolve(user);
+            }
+        });
     });
 };
 
