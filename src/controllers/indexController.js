@@ -1,16 +1,14 @@
 // For View
 const homeView = (req, res) => {
-
-    res.render("home", {
-    } );
+    res.render("home", {});
 }
 
-const connectionView = (req, res) =>{
-    res.render("connection", {});
+const signUpView = (req, res) =>{
+    res.render("signup", {});
 }
 
-const inscriptionView = (req, res) =>{
-    res.render("inscription", {});
+const signInView = (req, res) =>{
+    res.render("signin", {});
 }
 const aboutView = (req, res) =>{
     res.render("about", {});
@@ -18,7 +16,7 @@ const aboutView = (req, res) =>{
 
 module.exports =  {
     homeView,
-    connectionView,
-    inscriptionView,
+    signUpView,
+    signInView,
     aboutView
 };

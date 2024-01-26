@@ -5,11 +5,11 @@ const router = express.Router();
 const {homeView} = require('../controllers/indexController');
 router.get('/home', homeView);
 
-const {connectionView} = require('../controllers/indexController');
-router.get('/connection', connectionView);
+const {signUpView} = require('../controllers/indexController');
+router.get('/signUp', signUpView);
 
-const {inscriptionView} = require('../controllers/indexController');
-router.get('/inscription', inscriptionView);
+const {signInView} = require('../controllers/indexController');
+router.get('/signIn', signInView);
 
 const {aboutView} = require('../controllers/indexController');
 router.get('/about', aboutView);
@@ -18,5 +18,6 @@ const {accountView, settingsView, profileView} = require('../controllers/account
 router.get('/account', accountView);
 router.get('/settings', settingsView);
 router.get('/profile', profileView);
+
 
 module.exports = router;

@@ -1,5 +1,10 @@
 const express = require('express');
 const app = express();
+const bcrypt = require("bcryptjs");
+
+app.use(express.urlencoded({extended: 'false'}))
+app.use(express.json())
+
 app.set('view engine', 'ejs');
 app.set('views' , "./src/views");
 
@@ -14,6 +19,12 @@ const {homeView} = require("./src/controllers/indexController");
 const {router} = require("express/lib/application");
 app.get('/users', db.getUsers);
 
+app.post("/signIn/register", (req, res) => {
+    res.json({requestBody: req.body});  // <==== req.body will be a parsed JSON object
+    console.log(req.body);
+    db.AddUser(req,res);
+    res.redirect('/profile')
+})
 
 app.get('/', (req, res) => {
     res.redirect('/home');

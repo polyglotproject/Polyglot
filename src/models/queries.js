@@ -18,11 +18,11 @@ const getUsers = (request, response) => {
     })
   }
   const AddUser = (request, response) => {
-    const { nom_utilisateur, email, mot_de_passe, pays_preferee } = request.body;
+    const { user, email, password, flag } = request.body;
 
     pool.query(
       'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe, pays_preferee) VALUES ($1, $2, $3, $4)',
-      [nom_utilisateur, email, mot_de_passe, pays_preferee],
+      [user, email, password, flag],
       (error, results) => {
         if (error) {
           throw error;

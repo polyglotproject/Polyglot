@@ -355,13 +355,13 @@ body {
               <p class="main">nouvelle culture.</p>
               
             </div>
-            <form action="/home">
-                <input type="text" placeholder="Nom d'utilisateur" required>
-              <input type="email" placeholder="Email" required>
+            <form action="/signIn/register" method="post">
+                <input type="text" name="user" placeholder="Nom d'utilisateur" required>
+              <input type="email" name="email" placeholder="Email" required>
             
 
           
-              <input type="password" placeholder="Mot de passe" required>
+              <input type="password" name="password" placeholder="Mot de passe" required>
              
               <div class="pays">
                 <a class="login" id="popupTrigger">Choisie ton Pays à représenter</a>
