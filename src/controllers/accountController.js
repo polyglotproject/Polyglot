@@ -1,15 +1,19 @@
 const accountModel = require('../models/queries');
+const db = require("../models/queries");
 
 const accountView = (req, res) => {
-    res.render("account", {});
+    const user = db.getUser(req.session.userEmail);
+    res.render("account", {user});
 };
 
 const settingsView = (req, res) =>{
-    res.render("settings", {});
+    const user = db.getUser(req.session.userEmail);
+    res.render("settings", {user});
 }
 
 const profileView = (req, res) =>{
-    res.render("profile", {});
+    const user = db.getUser(req.session.userEmail);
+    res.render("profile", {user});
 }
 
 module.exports =  {
