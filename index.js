@@ -26,10 +26,11 @@ const {router} = require("express/lib/application");
 app.get('/users', db.getUsers);
 
 app.post("/signIn/register", (req, res) => {
-    const { user, email, password, flag } = req.body;
     console.log(req.body);
     db.AddUser(req,res);
-    req.session.userEmail = email;
+    req.session.userName = req.body.user;
+    req.session.userEmail = req.body.email;
+    req.session.country = req.body.flag;
     res.redirect('/account')
 })
 
@@ -39,8 +40,8 @@ app.get('/', (req, res) => {
 
 app.get('/account', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
-        res.render('account', {user});
+        const userName = req.session.userName;
+        res.render('account', {userName});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -49,10 +50,10 @@ app.get('/account', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
-        const country = await db.getUserCountry(req.session.userEmail);
+        const userName = req.session.userName;
+        const country = req.session.country;
         const date = await db.getUserDate(req.session.userEmail);
-        res.render('profile', {user, country, date});
+        res.render('profile', {userName, country, date});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -61,10 +62,10 @@ app.get('/profile', async (req, res) => {
 
 app.get('/settings', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
-        const country = await db.getUserCountry(req.session.userEmail);
+        const userName = req.session.userName;
+        const country = req.session.country;
         const userEmail = req.session.userEmail;
-        res.render('settings', {user, userEmail, country});
+        res.render('settings', {userName, userEmail, country});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');

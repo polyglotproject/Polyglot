@@ -74,7 +74,7 @@
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong><%= user.nom_utilisateur %></strong>
+            <strong><%= userName %></strong>
         </a>
         <ul class="dropdown-menu text-small shadow">
             <li><a class="dropdown-item" href="#">Déconnexion</a></li>
@@ -93,8 +93,8 @@
                         </button>
                         <hr>
                         <div class="card-body">
-                            <h4 class="card-title">@<%= user.nom_utilisateur %></h4>
-                            <p class="card-text">Pays représenté : <%= country.pays_preferee %></p>
+                            <h4 class="card-title">@<%= userName %></h4>
+                            <p class="card-text">Pays représenté : <%= country %></p>
                             <p class="card-text"><small class="text-body-secondary">Inscrit le <%= date.date_inscription %></small></p>
                         </div>
                     </div>

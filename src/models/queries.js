@@ -32,43 +32,27 @@ const getUsers = (request, response) => {
   };
 
 const getUser = (userEmail) => {
-    return new Promise((resolve, reject) => {
-        pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
-            if (error) {
-                reject(error);
-            } else {
-                console.log(results.rows[0])
-                const user = results.rows[0];
-                resolve(user);
-            }
+    return pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
         });
-    });
 };
 
 const getUserCountry = (userEmail) => {
-    return new Promise((resolve, reject) => {
-        pool.query('SELECT pays_preferee FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
-            if (error) {
-                reject(error);
-            } else {
-                const user = results.rows[0];
-                resolve(user);
-            }
+    return pool.query('SELECT pays_preferee FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
         });
-    });
 };
 
 const getUserDate = (userEmail) => {
-    return new Promise((resolve, reject) => {
-        pool.query('SELECT date_inscription FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
-            if (error) {
-                reject(error);
-            } else {
-                const user = results.rows[0];
-                resolve(user);
-            }
+    return pool.query('SELECT date_inscription FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
         });
-    });
 };
 
 const addSalon = (channelData, callback) => {
