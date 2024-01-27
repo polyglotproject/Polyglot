@@ -39,6 +39,14 @@ const getUser = (userEmail) => {
         });
 };
 
+const getUserPass = (userEmail) => {
+    return pool.query('SELECT mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
+        });
+};
+
 const getUserCountry = (userEmail) => {
     return pool.query('SELECT pays_preferee FROM Utilisateurs WHERE email = $1', [userEmail])
         .then((results) => results.rows[0])
@@ -113,5 +121,6 @@ module.exports = {
   getAllCountries,
   getCountryByNom,
     getUserCountry,
-    getUserDate
+    getUserDate,
+    getUserPass
 }
