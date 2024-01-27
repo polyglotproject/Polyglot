@@ -5,10 +5,30 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'butinfo',
+  password: 'postgres',
   port: 5432,
 })
-
+const UserExist = (email) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      'SELECT * FROM Utilisateurs WHERE email= $1',
+      [email],
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          if (results.rowCount !== 0) {
+            console.log('User in database');
+            resolve(true);
+          } else {
+            console.log('NOT User in database');
+            resolve(false);
+          }
+        }
+      }
+    );
+  });
+};
 const getUsers = (request, response) => {
     pool.query('SELECT * FROM Utilisateurs ORDER BY id_utilisateur ASC', (error, results) => {
       if (error) {
@@ -125,5 +145,6 @@ module.exports = {
   getCountryByNom,
     getUserCountry,
     getUserDate,
-    getUserPass
+    getUserPass,
+    UserExist
 }

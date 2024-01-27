@@ -3,7 +3,7 @@ const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
 
-app.use(express.urlencoded({extended: 'false'}))
+app.use(express.urlencoded({ extended: 'false' }))
 app.use(express.json())
 app.use(session({
     secret: "&4$r1(_&@+*swk_c=&^nwfgw4optf=^o9lvd&@%^@@=04&!$",
@@ -12,7 +12,7 @@ app.use(session({
 }));
 
 app.set('view engine', 'ejs');
-app.set('views' , "./src/views");
+app.set('views', "./src/views");
 
 //Routes
 const PORT = process.env.PORT || 4111;
@@ -21,22 +21,35 @@ app.listen(PORT, console.log("Server has started at port " + PORT));
 
 // BDD
 const db = require('./src/models/queries')
-const {homeView} = require("./src/controllers/indexController");
-const {router} = require("express/lib/application");
+const { homeView } = require("./src/controllers/indexController");
+const { router } = require("express/lib/application");
 app.get('/users', db.getUsers);
 
 app.post("/signIn/register", (req, res) => {
     console.log(req.body);
-    db.AddUser(req,res);
-    req.session.userName = req.body.user;
-    req.session.userEmail = req.body.email;
-    req.session.country = req.body.flag;
-    res.redirect('/account')
+    const email = req.body.email;
+    db.UserExist(email)
+        .then((userExists) => {
+            if (userExists) {
+                res.redirect('/signin?userExist=true')
+            } else {
+                db.AddUser(req, res);
+                req.session.userName = req.body.user;
+                req.session.userEmail = req.body.email;
+                req.session.country = req.body.flag;
+                res.redirect('/account')            }
+        })
+        .catch((error) => {
+            console.error('Error checking user existence:', error);
+        });
+  
+
+
 });
 
 app.post("/signUp/login", async (req, res) => {
     try {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
         const mdp = await db.getUserPass(email);
 
         if (password === mdp.mot_de_passe_hashed) {
@@ -47,7 +60,7 @@ app.post("/signUp/login", async (req, res) => {
             req.session.country = country.pays_preferee;
             res.redirect('/account')
         } else {
-          res.redirect('/signUp');
+            res.redirect('/signUp');
         }
     }
     catch (error) {
@@ -63,7 +76,7 @@ app.get('/', (req, res) => {
 app.get('/account', async (req, res) => {
     try {
         const userName = req.session.userName;
-        res.render('account', {userName});
+        res.render('account', { userName });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -75,7 +88,7 @@ app.get('/profile', async (req, res) => {
         const userName = req.session.userName;
         const country = req.session.country;
         const date = await db.getUserDate(req.session.userEmail);
-        res.render('profile', {userName, country, date});
+        res.render('profile', { userName, country, date });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -87,7 +100,7 @@ app.get('/settings', async (req, res) => {
         const userName = req.session.userName;
         const country = req.session.country;
         const userEmail = req.session.userEmail;
-        res.render('settings', {userName, userEmail, country});
+        res.render('settings', { userName, userEmail, country });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
