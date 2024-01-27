@@ -48,12 +48,13 @@ app.post("/signUp/login", async (req, res) => {
             res.redirect('/account')
         } else {
           res.redirect('/signUp');
-        } catch (error) {
+        }
+    }
+    catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
 });
-=======
 
 app.get('/', (req, res) => {
     res.redirect('/home');
