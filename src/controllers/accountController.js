@@ -8,7 +8,8 @@ const accountView = (req, res) => {
 
 const settingsView = (req, res) =>{
     const user = db.getUser(req.session.userEmail);
-    res.render("settings", {user});
+    const userEmail = req.session.userEmail;
+    res.render("settings", {user, userEmail});
 }
 
 const profileView = (req, res) =>{

@@ -27,7 +27,6 @@
         .btn-narrow {
             width: 60%;
         }
-
     </style>
 </head>
 <body class="d-flex">
@@ -75,7 +74,7 @@
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong>Nom utilisateur</strong>
+            <strong><%= user.nom_utilisateur %></strong>
         </a>
         <ul class="dropdown-menu text-small shadow">
             <li><a class="dropdown-item" href="#">Déconnexion</a></li>
@@ -94,7 +93,7 @@
                         </button>
                         <hr>
                         <div class="card-body">
-                            <h4 class="card-title">@username</h4>
+                            <h4 class="card-title">@<%= user.nom_utilisateur %></h4>
                             <p class="card-text">Pays représenté : </p>
                             <p class="card-text"><small class="text-body-secondary">Inscrit le ...</small></p>
                         </div>

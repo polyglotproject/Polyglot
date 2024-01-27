@@ -61,7 +61,7 @@
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong>Nom utilisateur</strong>
+            <strong><%= user.nom_utilisateur %></strong>
         </a>
         <ul class="dropdown-menu text-small shadow">
             <li><a class="dropdown-item" href="#">Déconnexion</a></li>
@@ -78,7 +78,7 @@
                         <form>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Nom d'utilisateur</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="" value="">
+                                <input class="form-control" id="inputUsername" type="text" placeholder="<%= user.nom_utilisateur %>" value="">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputOrgName">Pays</label>
@@ -92,7 +92,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Adresse mail</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="" value="" disabled>
+                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="<%= userEmail %>" value="" disabled>
                             </div>
                             <button class="btn btn-primary modif" type="button">Modifier les changements</button>
                         </form>
