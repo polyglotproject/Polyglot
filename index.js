@@ -29,25 +29,19 @@ const {homeView} = require("./src/controllers/indexController");
 const {router} = require("express/lib/application");
 app.get('/users', db.getUsers);
 
-app.post("/account", (req, res) => {
-    const { user, email, password , flag } = req.body;
-    db.AddUser(req,res);
-    req.session.userEmail = email;
-    res.redirect('/account')
-})
-
-app.get('/', (req, res) => {
-    res.redirect('/home');
-});
 
 
 // SignIn POST
-app.post("/signIn/register", (req, res) => {
+app.post("/signIn/register", async (req, res) => {
     try{
         const { user, email, password, flag } = req.body;
-        db.AddUser(req,res);
+        await db.AddUser(req,res)
+        const data = await db.getUser(email);
         req.session.userEmail = email;
-        res.redirect('/account')
+        res.render('account', {data});
+        
+        
+       
     }
     catch(error){
         console.error(error);
