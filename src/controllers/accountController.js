@@ -6,6 +6,7 @@ const accountView = (req, res) => {
     res.render("account", {data});
 };
 
+
 const settingsView = (req, res) =>{
     const user = db.getUser(req.session.userEmail);
     const country = db.getUserCountry(req.session.userEmail);

@@ -1,5 +1,6 @@
 const { request, response } = require('express')
-
+const bcrypt = require("bcryptjs");
+const saltRounds = 12; 
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -8,6 +9,15 @@ const pool = new Pool({
   password: 'postgres', //lol j'ai ton mdp #hacker
   port: 5432,
 })
+async function hashPassword(password) {
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  } catch (error) {
+    throw error;
+  }
+}
+
 const UserExist = (email) => {
   return new Promise((resolve, reject) => {
     pool.query(
@@ -37,11 +47,12 @@ const getUsers = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
-  const AddUser = (request, response, callback) => {
+  const AddUser = async (request, response, callback) => {
     const { user, email, password, flag , date_inscription } = request.body;
+    const hash_pass = await hashPassword(request.body.password);
     pool.query(
       'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee) VALUES ($1, $2, $3, $4, $5)',
-      [user, email, password, date_inscription, flag],
+      [user, email, hash_pass, date_inscription, flag],
       (error, results) => {
         if (error) {
           console.error(error);

@@ -2,7 +2,15 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
-
+const saltRounds = 12; 
+async function verifyPassword(password, hashedPassword) {
+    try {
+      const match = await bcrypt.compare(password, hashedPassword);
+      return match;
+    } catch (error) {
+      throw error;
+    }
+  }
 app.use(express.urlencoded({ extended: 'false' }))
 app.use(express.json())
 app.use(session({
@@ -51,33 +59,40 @@ app.post("/signIn/register", (req, res) => {
 
 app.post("/signUp/login", async (req, res) => {
     try {
-      const { email, password } = req.body;
-
-      // Use Promise.all to run both queries concurrently
-      const [mdp, mail] = await Promise.all([
-        db.getUserPass(email),
-        db.getUserEmail(email)
-      ]);
-
-
-
-      if (mdp && mail && password === mdp.mot_de_passe_hashed && email === mail.email) {
-        const userName = await db.getUser(email);
-        req.session.userName = userName.nom_utilisateur;
-        req.session.userEmail = email;
-        req.session.userError = false;
-        const country = await db.getUserCountry(email);
-        const date = await db.getUserDate(email);
-        req.session.date_inscription = date.date_inscription;
-        req.session.country = country.pays_preferee;
-        res.redirect('/account');
-      } else {
-        res.redirect('/signUp?credentialsError=true');
+        const { email, password } = req.body;
+      
+        const [mdp, mail] = await Promise.all([
+          db.getUserPass(email),
+          db.getUserEmail(email)
+        ]);
+      
+        if (mdp && mail) {
+          const isPasswordMatch = await verifyPassword(password, mdp.mot_de_passe_hashed);
+      
+          if (isPasswordMatch && email === mail.email) {
+            const userName = await db.getUser(email);
+            const country = await db.getUserCountry(email);
+            const date = await db.getUserDate(email);
+      
+            req.session.userName = userName.nom_utilisateur;
+            req.session.userEmail = email;
+            req.session.userError = false;
+            req.session.date_inscription = date.date_inscription;
+            req.session.country = country.pays_preferee;
+      
+            res.redirect('/account');
+          } else {
+            res.redirect('/signUp?credentialsError=true' );
+        }
+        } else {
+            res.redirect('/signUp?credentialsError=true' );
+        }
+      } catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
       }
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Erreur lors de la récupération des données utilisateur.');
-    }
+      
 });
 
 app.get('/', (req, res) => {
