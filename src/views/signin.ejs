@@ -1,409 +1,429 @@
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-    
-    .flex {
-      display: flex;
-      align-items: center;
-    }
-    
-    .containeur {
-      padding: 0 15px;
-      min-height: 100vh;
-      justify-content: center;
-      background: #f0f2f5;
-    }
-    
-    .facebook-page {
-      justify-content: space-between;
-      max-width: 1000px;
-      width: 100%;
-    }
-    
-    .facebook-page .text {
-      margin-bottom: 90px;
-    }
-    
-    .facebook-page h1 {
-      color: #00ADFE;
-      font-size: 4rem;
-      margin-bottom: 10px;
-    }
-    
-    .facebook-page p {
-      font-size: 1.75rem;
-      white-space: nowrap;
-    }
-    
-    form {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-        0 8px 16px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-    }
-    
-    form input {
-      height: 55px;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 1rem;
-      padding: 0 14px;
-    }
-    
-    form input:focus {
-      outline: none;
-      border-color: #00ADFE;
-    }
-    img{
-        position: relative;
-        right:15px;
-        margin-right: 5px;
-    }
-    
-    ::placeholder {
-      color: #777;
-      font-size: 1.063rem;
-    }
-    
-    .link {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      gap: 15px;
-    }
-    
-    .link .login {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      background: #00ADFE;
-      padding: 15px 0;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 1.25rem;
-      font-weight: 600;
-      transition: 0.2s ease;
-      
-    }
-    
-    .link .login:hover {
-      background: #00ADFE;
-    }
-    
-    form a {
-      text-decoration: none;
-    }
-    
-    .link .forgot {
-      color: #1877f2;
-      font-size: 0.875rem;
-    }
-    
-    .link .forgot:hover {
-      text-decoration: underline;
-    }
-    .pays {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      gap: 10px;
-      
-    }
-    
-    .pays .login {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  background: #00ADFE;
-  padding: 15px 0;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 600;
-  transition: background .3s ease, color .2s ease;
-  margin-top: 20px;
-  margin-bottom: 35px;
-  margin-left: 35px;
-  height: 55px;
-  width: 80%;
-  border: 1px solid #00ADFE;
-  background-image: url("images/clip-art-earth-3.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 6px;
-  font-size: 1rem;
-  color: #fff;
-}
-
-.pays .login:hover {
-  background: #50c9f4; /* Change the background color on hover */
-  color: #fff; /* Change the text color on hover */
-}
-
-
-    
-   
-    hr {
-      border: none;
-      height: 1px;
-      background-color: #ccc;
-      margin-bottom: 20px;
-      margin-top: 20px;
-    }
-    
-    .button {
-      text-align: center;
-    }
-    
-    @media (max-width: 900px) {
-      .facebook-page {
-        flex-direction: column;
-        text-align: center;
-      }
-    
-      .facebook-page .text {
-        margin-bottom: 30px;
-      }
-    }
-    
-    @media (max-width: 460px) {
-      .facebook-page h1 {
-        font-size: 3.5rem;
-      }
-    
-      .facebook-page p {
-        font-size: 1.3rem;
-      }
-    
-      form {
-        padding: 15px;
-      }
-    }
-    .main{
-        font-family: 'Roboto', sans-serif;  
-        margin-bottom: 0;
-    }@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap');
-* {
-  box-sizing: inherit;
-}
-*:before, *:after {
-  box-sizing: inherit;
-}
-html {
-	font-weight: normal;
-	-webkit-font-smoothing: antialiased;
-	scroll-behavior: smooth;
-	  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-	background: #2b3956;
-	font-size: 16px;
-	line-height: normal;
-	color: #fff;
-	margin: 0;
-	min-width: 320px;
-}
-
-.filters {
-	position:relative;
-	width:200px;
-	margin: 30px auto;
-}
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.selectors {
-  margin-top: 10px;
-}
-
-.selectors label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.close-btn {
-  margin-top: 10px;
-  cursor: pointer;
-  color: #007BFF;
-}
-.custom-checkbox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.custom-checkbox input {
-  display: none;
-}
-.custom-checkbox img{
-  margin-left: 20px;
-}
-.custom-checkbox label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-left: 20px;
-
-}
-
-.custom-checkbox .checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #007BFF;
-  margin-right: 10px;
-}
-
-.custom-checkbox input:checked + label .checkbox {
-  background-color: #007BFF;
-}
-
-.options-container {
-  display: flex;
-  
-}
-
-.options-group {
-  width: 45%; /* Ajustez la largeur en fonction de vos besoins */
-  box-sizing: border-box;
-  margin-bottom: 10px;
-}
-
-
-.custom-checkbox {
-  margin-bottom: 10px;
-}
-
-.custom-checkbox input {
-  display: none;
-}
-
-.custom-checkbox label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.custom-checkbox .checkbox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #007BFF;
-  margin-right: 10px;
-}
-
-
-.custom-checkbox input:checked + label .checkbox {
-  background-color: #007BFF;
-}
-@media (max-width: 768px) {
-  .options-container{
-    flex-wrap: wrap;
-  justify-content: space-around;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
   }
-  .options-group {
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .containeur {
+    padding: 0 15px;
+    min-height: 100vh;
+    justify-content: center;
+    background: #f0f2f5;
+  }
+
+  .facebook-page {
+    justify-content: space-between;
+    max-width: 1000px;
     width: 100%;
   }
-}
-.custom-popup-class {
-  width: 60%; /* Ajustez la largeur selon vos besoins */
-}
-.custom-checkbox label:hover::after {
-  content: attr(data-country); /* Utilisation de l'attribut data-country pour afficher le nom du pays */
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px;
-  border-radius: 5px;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-}
-    </style>
-    
 
-    
-        <div class="containeur flex">
-          <div class="facebook-page flex">
-            <div class="text">
-                <img src="images/logo.png" width="225">
-              <p class="main">Avec Polyglot, partagez et apprenez de</p>
-              <p class="main">nouvelle culture.</p>
-              
-            </div>
-            <form action="/signIn/register" method="post">
-                <input type="text" name="user" placeholder="Nom d'utilisateur" required>
-              <input type="email" name="email" placeholder="Email" required>
-            
+  .facebook-page .text {
+    margin-bottom: 90px;
+  }
 
-          
-              <input type="password" name="password" placeholder="Mot de passe" required>
-             
-              <div class="pays">
-                <a class="login" id="popupTrigger">Choisie ton Pays à représenter</a>
-              </div>
-              
-              <div class="link">
-                <button type="submit" class="login">S'inscrire</button>
-             
-              </div>
-              <hr>
-              <div class="button">
-                <a href="/connection">Vous avez déjà un compte ?</a>
-              </div>
-            </form>
-          </div>
-        </div>
-        <script>
-         document.getElementById('popupTrigger').addEventListener('click', function() {
-  openPopup();
-});
+  .facebook-page h1 {
+    color: #00ADFE;
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  .facebook-page p {
+    font-size: 1.75rem;
+    white-space: nowrap;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  form input {
+    height: 55px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    padding: 0 14px;
+  }
+
+  form input:focus {
+    outline: none;
+    border-color: #00ADFE;
+  }
+
+  img {
+    position: relative;
+    right: 15px;
+    margin-right: 5px;
+  }
+
+  ::placeholder {
+    color: #777;
+    font-size: 1.063rem;
+  }
+
+  .link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .link .login {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #00ADFE;
+    padding: 15px 0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+
+  }
+
+  .link .login:hover {
+    background: #00ADFE;
+  }
+
+  form a {
+    text-decoration: none;
+  }
+
+  .link .forgot {
+    color: #1877f2;
+    font-size: 0.875rem;
+  }
+
+  .link .forgot:hover {
+    text-decoration: underline;
+  }
+
+  .pays {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+
+  }
+
+  .pays .login {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #00ADFE;
+    padding: 15px 0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: background .3s ease, color .2s ease;
+    margin-top: 20px;
+    margin-bottom: 35px;
+    margin-left: 35px;
+    height: 55px;
+    width: 80%;
+    border: 1px solid #00ADFE;
+    background-image: url("images/clip-art-earth-3.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .pays .login:hover {
+    background: #50c9f4;
+    /* Change the background color on hover */
+    color: #fff;
+    /* Change the text color on hover */
+  }
 
 
 
-function openPopup() {
-  Swal.fire({
-  title: 'Choisissez votre pays à représenter',
-  customClass: {
-    popup: 'custom-popup-class',
-  },
-  color: "000",
-  html: `
+
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .button {
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .facebook-page {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .facebook-page .text {
+      margin-bottom: 30px;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .facebook-page h1 {
+      font-size: 3.5rem;
+    }
+
+    .facebook-page p {
+      font-size: 1.3rem;
+    }
+
+    form {
+      padding: 15px;
+    }
+  }
+
+  .main {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;900&display=swap');
+
+  * {
+    box-sizing: inherit;
+  }
+
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+  html {
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background: #2b3956;
+    font-size: 16px;
+    line-height: normal;
+    color: #fff;
+    margin: 0;
+    min-width: 320px;
+  }
+
+  .filters {
+    position: relative;
+    width: 200px;
+    margin: 30px auto;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .selectors {
+    margin-top: 10px;
+  }
+
+  .selectors label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .close-btn {
+    margin-top: 10px;
+    cursor: pointer;
+    color: #007BFF;
+  }
+
+  .custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .custom-checkbox input {
+    display: none;
+  }
+
+  .custom-checkbox img {
+    margin-left: 20px;
+  }
+
+  .custom-checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
+
+  }
+
+  .custom-checkbox .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007BFF;
+    margin-right: 10px;
+  }
+
+  .custom-checkbox input:checked+label .checkbox {
+    background-color: #007BFF;
+  }
+
+  .options-container {
+    display: flex;
+
+  }
+
+  .options-group {
+    width: 45%;
+    /* Ajustez la largeur en fonction de vos besoins */
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+
+  .custom-checkbox {
+    margin-bottom: 10px;
+  }
+
+  .custom-checkbox input {
+    display: none;
+  }
+
+  .custom-checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .custom-checkbox .checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007BFF;
+    margin-right: 10px;
+  }
+
+
+  .custom-checkbox input:checked+label .checkbox {
+    background-color: #007BFF;
+  }
+
+  @media (max-width: 768px) {
+    .options-container {
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .options-group {
+      width: 100%;
+    }
+  }
+
+  .custom-popup-class {
+    width: 60%;
+    /* Ajustez la largeur selon vos besoins */
+  }
+
+  .custom-checkbox label:hover::after {
+    content: attr(data-country);
+    /* Utilisation de l'attribut data-country pour afficher le nom du pays */
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+</style>
+
+
+
+<div class="containeur flex">
+  <div class="facebook-page flex">
+    <div class="text">
+      <img src="images/logo.png" width="225">
+      <p class="main">Avec Polyglot, partagez et apprenez de</p>
+      <p class="main">nouvelle culture.</p>
+
+    </div>
+    <form action="/account" method="post" id="register">
+      <input type="text" name="user" placeholder="Nom d'utilisateur" required>
+      <input type="email" name="email" placeholder="Email" required>
+
+
+
+      <input type="password" name="password" placeholder="Mot de passe" required>
+
+      <div class="pays">
+        <a class="login" id="popupTrigger">Choisie ton Pays à représenter</a>
+      </div>
+
+      <div class="link">
+        <button type="submit" class="login" onclick="return verifchoice()">S'inscrire</button>
+
+      </div>
+      <hr>
+      <div class="button">
+        <a href="/connection">Vous avez déjà un compte ?</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+  document.getElementById('popupTrigger').addEventListener('click', function () {
+    openPopup();
+  });
+
+
+  function openPopup() {
+    Swal.fire({
+      title: 'Choisissez votre pays à représenter',
+      customClass: {
+        popup: 'custom-popup-class',
+      },
+      color: "000",
+      html: `
   <div class="options-container">
       <div class="options-group">
         <div class="custom-checkbox">
-          <input type="radio" id="image1" name="flag" value="https://flagicons.lipis.dev/flags/4x3/af.svg">
+          <input type="radio" id="image1" name="flag" value="france">
           <label for="image1" data-country="France">
             <span class="checkbox"></span>
             <img src="images/france.png" alt="France" width="100">
           </label>
         </div>
         <div class="custom-checkbox">
-          <input type="radio" id="image2" name="flag" value="https://flagicons.lipis.dev/flags/4x3/al.svg">
+          <input type="radio" id="image2" name="flag" value="angleterre">
           <label for="image2" data-country="Angleterre">
             <span class="checkbox"></span>
             <img src="images/united-kingdom.png" alt="Angleterre" width="100">
@@ -413,14 +433,14 @@ function openPopup() {
       </div>
       <div class="options-group">
         <div class="custom-checkbox">
-          <input type="radio" id="image4" name="flag" value="path/to/image4.svg">
+          <input type="radio" id="image4" name="flag" value="espagne">
           <label for="image4" data-country="Espagne">
             <span class="checkbox"></span>
             <img src="images/spain.png" alt="Country 4" width="100">
           </label>
         </div>
         <div class="custom-checkbox">
-          <input type="radio" id="image5" name="flag" value="path/to/image5.svg">
+          <input type="radio" id="image5" name="flag" value="japon">
           <label for="image5" data-country="Japon">
             <span class="checkbox"></span>
             <img src="images/japan.png" alt="Country 5" width="100">
@@ -430,14 +450,14 @@ function openPopup() {
       </div>
       <div class="options-group">
         <div class="custom-checkbox">
-          <input type="radio" id="image6" name="flag" value="path/to/image4.svg">
+          <input type="radio" id="image6" name="flag" value="italie">
           <label for="image6" data-country="Italie">
             <span class="checkbox"></span>
             <img src="images/italy.png" alt="Country 4" width="100">
           </label>
         </div>
         <div class="custom-checkbox">
-          <input type="radio" id="image7" name="flag" value="path/to/image4.svg">
+          <input type="radio" id="image7" name="flag" value="autre">
           <label for="image7" data-country="Autre">
             <span class="checkbox"></span>
             <p style="margin-top:17.5px"> Autre </p>
@@ -451,39 +471,85 @@ function openPopup() {
     <br/>
     Nous travaillons dure pour élargir les propositions de pays. Merci de votre compréhension ! </p>
   `,
-  showCloseButton: true,
-  showConfirmButton: true,
-  confirmButtonColor: "007BFF",
-  confirmButtonText: 'Continuer mon inscription',
-}).then((result) => {
-  if (result.isConfirmed) {
-    const selectedImage = document.querySelector('input[name="flag"]:checked');
+      showCloseButton: true,
+      showConfirmButton: true,
+      confirmButtonColor: "007BFF",
+      confirmButtonText: 'Continuer mon inscription',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        selectedImage = document.querySelector('input[name="flag"]:checked');
+        if (selectedImage) {
+          const selectedFlag = selectedImage.value;
 
-    if (selectedImage) {
-      console.log("Image selected !" + selectedImage)
-    } else {
-      Swal.fire({
-        icon: 'error',
-        text: 'Vous n\'avez pas sélectionné de drapeau :(',
-        confirmButtonText: 'Réesayer',
-      }).then((result) => {
-  if (result.isConfirmed) {
-    openPopup(); // Appeler la fonction openPopup
+          // Ajoutez le drapeau choisi aux paramètres de l'URL
+          const existingInput = document.querySelector('input[name="flag"]');
+          const registerForm = document.getElementById('register');
+
+                    // Si un champ existe déjà, supprimez-le
+                    if (existingInput) {
+                        existingInput.remove();
+                    }
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = 'flag';
+          hiddenInput.value = selectedImage.value;
+          registerForm.appendChild(hiddenInput);
+          console.log("Image selected !" + selectedImage.value)
+
+        } else {
+          Swal.fire({
+            icon: 'error',
+            text: 'Vous n\'avez pas sélectionné de drapeau :(',
+            confirmButtonText: 'Réesayer',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              openPopup(); // Appeler la fonction openPopup
+            }
+          });
+        }
+      } else {
+        console.log(`La boîte de dialogue a été fermée ou rejetée.`);
+      }
+    });
+
+
   }
-});
+  function verifchoice() {
+    const allowedValues = ["france", "angleterre", "espagne", "japon", "italie", "autre"];
+    if (selectedImage !== null) {
+      if (allowedValues.includes(selectedImage.value)) {
+        console.log("Image selected: " + selectedImage.value);
+        console.log("AIGHT");
+        const newUrl = window.location.pathname + '?' + urlSearchParams.toString();
+        history.replaceState({}, '', newUrl);
+        return true;  // Autorise l'inscription
+      } else {
+        console.log(selectedImage.value)
+        Swal.fire({
+          icon: 'warning',
+          text: "Veuillez choisir un pays !",
+          confirmButtonText: 'Choisir',
+        });
+        return false;  // Empêche l'inscription
+      }
     }
-  } else {
-    console.log(`La boîte de dialogue a été fermée ou rejetée.`);
+    else {
+      Swal.fire({
+        icon: 'warning',
+        text: "Veuillez remplir toutes les données nécessaire à l'inscription",
+        confirmButtonText: 'Ok',
+      });
+      return false;  // Empêche l'inscription
+    }
   }
-});
 
+  window.addEventListener('load', function () {
+    selectedImage = null;
+    console.log(selectedImage.value)
 
-}
+  });
 
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-        <%- include('footer.ejs'); %>
+<%- include('footer.ejs'); %>

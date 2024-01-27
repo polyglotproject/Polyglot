@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'butinfo',
+  password: 'postgres',
   port: 5432,
 })
 
@@ -19,7 +19,7 @@ const getUsers = (request, response) => {
   }
   const AddUser = (request, response) => {
     const { user, email, password, flag } = request.body;
-
+    console.log(flag);
     pool.query(
       'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, pays_preferee) VALUES ($1, $2, $3, $4)',
       [user, email, password, flag],
