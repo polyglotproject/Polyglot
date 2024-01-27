@@ -32,13 +32,12 @@ app.post("/signIn/register", (req, res) => {
     req.session.userEmail = req.body.email;
     req.session.country = req.body.flag;
     res.redirect('/account')
-})
+});
 
 app.post("/signUp/login", async (req, res) => {
     try {
         const {email, password} = req.body;
         const mdp = await db.getUserPass(email);
-        console.log("Mot de passe haché récupéré de la base de données :", mdp);
 
         if (password === mdp.mot_de_passe_hashed) {
             const userName = await db.getUser(email);
@@ -48,13 +47,13 @@ app.post("/signUp/login", async (req, res) => {
             req.session.country = country.pays_preferee;
             res.redirect('/account')
         } else {
-            res.redirect('/signUp');
-        }
-    } catch (error) {
+          res.redirect('/signUp');
+        } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
-})
+});
+=======
 
 app.get('/', (req, res) => {
     res.redirect('/home');

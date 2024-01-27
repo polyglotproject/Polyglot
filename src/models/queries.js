@@ -17,15 +17,18 @@ const getUsers = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
-  const AddUser = (request, response) => {
+  const AddUser = (request, response, callback) => {
     const { user, email, password, flag } = request.body;
-
     pool.query(
       'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, pays_preferee) VALUES ($1, $2, $3, $4)',
       [user, email, password, flag],
       (error, results) => {
         if (error) {
-          throw error;
+          console.error(error);
+          return false; // Return false if an error occurs
+        } else {
+          console.log('User added successfully');
+          return true; // Return true if the user is added successfully
         }
       }
     );
