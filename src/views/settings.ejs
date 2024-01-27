@@ -61,10 +61,10 @@
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong><%= user.nom_utilisateur %></strong>
+            <strong><%= userName %></strong>
         </a>
         <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">Déconnexion</a></li>
+            <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
         </ul>
     </div>
 </div>
@@ -78,17 +78,18 @@
                         <form>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Nom d'utilisateur</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="<%= user.nom_utilisateur %>" value="">
+                                <input class="form-control" id="inputUsername" type="text" placeholder="<%= userName %>" value="">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputOrgName">Pays</label>
                                 <select class="form-select" aria-label="Default select example">
-                                    <option value="angleterre">Angleterre</option>
-                                    <option value="espagne">Espagne</option>
-                                    <option value="france">France</option>
-                                    <option value="italie">Italie</option>
-                                    <option value="japon">Japon</option>
+                                    <option value="angleterre" <%= country === 'angleterre' ? 'selected' : '' %>>Angleterre</option>
+                                    <option value="espagne" <%= country === 'espagne' ? 'selected' : '' %>>Espagne</option>
+                                    <option value="france" <%= country === 'france' ? 'selected' : '' %>>France</option>
+                                    <option value="italie" <%= country === 'italie' ? 'selected' : '' %>>Italie</option>
+                                    <option value="japon" <%= country === 'japon' ? 'selected' : '' %>>Japon</option>
                                 </select>
+
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Adresse mail</label>

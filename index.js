@@ -1,11 +1,8 @@
-// Initialisation
 const express = require('express');
 const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
-const url = require('node:url');
 
-// Configuration
 app.use(express.urlencoded({extended: 'false'}))
 app.use(express.json())
 app.use(session({
@@ -16,7 +13,6 @@ app.use(session({
 
 app.set('view engine', 'ejs');
 app.set('views' , "./src/views");
-
 
 //Routes
 const PORT = process.env.PORT || 4111;
@@ -29,62 +25,56 @@ const {homeView} = require("./src/controllers/indexController");
 const {router} = require("express/lib/application");
 app.get('/users', db.getUsers);
 
+app.post("/signIn/register", (req, res) => {
+    console.log(req.body);
+    db.AddUser(req,res);
+    req.session.userName = req.body.user;
+    req.session.userEmail = req.body.email;
+    req.session.country = req.body.flag;
+    res.redirect('/account')
+});
 
+app.post("/signUp/login", async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const mdp = await db.getUserPass(email);
 
-// SignIn POST
-app.post("/signIn/register", async (req, res) => {
-    try{
-        const { user, email, password, flag } = req.body;
-        await db.AddUser(req,res)
-        const data = await db.getUser(email);
-        req.session.userEmail = email;
-        res.render('account', {data});
-        
-        
-       
-    }
-    catch(error){
-        console.error(error);
-        res.status(500).send('Erreur lors de l\'inscription de l\'utilisateur');
-    }
-})
-
-
-// SignUp POST
-app.post("/account", async (req, res) => {
-    try{
-        const { email, password} = req.body;
-        const user = await db.getUser(email);
-        if (password === user.mot_de_passe_hashed) {
-            res.render('account', {user});
-        }
-        else{
-            res.redirect('/signUp');
-        }
-    }
-    catch(error){
+        if (password === mdp.mot_de_passe_hashed) {
+            const userName = await db.getUser(email);
+            req.session.userName = userName.nom_utilisateur;
+            req.session.userEmail = email;
+            const country = await db.getUserCountry(email);
+            req.session.country = country.pays_preferee;
+            res.redirect('/account')
+        } else {
+          res.redirect('/signUp');
+        } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
-})
+});
+=======
 
-function test(){
+app.get('/', (req, res) => {
+    res.redirect('/home');
+});
 
 app.get('/account', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
-        res.render('account', {user});
+        const userName = req.session.userName;
+        res.render('account', {userName});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
 });
-}
 
 app.get('/profile', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
-        res.render('profile', {user});
+        const userName = req.session.userName;
+        const country = req.session.country;
+        const date = await db.getUserDate(req.session.userEmail);
+        res.render('profile', {userName, country, date});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -93,13 +83,25 @@ app.get('/profile', async (req, res) => {
 
 app.get('/settings', async (req, res) => {
     try {
-        const user = await db.getUser(req.session.userEmail);
+        const userName = req.session.userName;
+        const country = req.session.country;
         const userEmail = req.session.userEmail;
-        res.render('settings', {user, userEmail});
+        res.render('settings', {userName, userEmail, country});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error ending session');
+        } else {
+            res.redirect('/home'); // Redirect to home page or login page after logging out
+        }
+    });
 });
 
 app.use(express.static('public'));

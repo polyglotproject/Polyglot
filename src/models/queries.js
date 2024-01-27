@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'postgres',
+  password: 'butinfo',
   port: 5432,
 })
 
@@ -19,7 +19,6 @@ const getUsers = (request, response) => {
   }
   const AddUser = (request, response, callback) => {
     const { user, email, password, flag } = request.body;
-    
     pool.query(
       'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, pays_preferee) VALUES ($1, $2, $3, $4)',
       [user, email, password, flag],
@@ -35,13 +34,38 @@ const getUsers = (request, response) => {
     );
   };
 
-  const getUser = (userEmail) => {
-    return pool.query('SELECT nom_utilisateur, mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
-      .then((results) => results.rows[0])
-      .catch((error) => {
-        throw error;
-      });
-  };
+const getUser = (userEmail) => {
+    return pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
+        });
+};
+
+const getUserPass = (userEmail) => {
+    return pool.query('SELECT mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
+        });
+};
+
+const getUserCountry = (userEmail) => {
+    return pool.query('SELECT pays_preferee FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
+        });
+};
+
+const getUserDate = (userEmail) => {
+    return pool.query('SELECT date_inscription FROM Utilisateurs WHERE email = $1', [userEmail])
+        .then((results) => results.rows[0])
+        .catch((error) => {
+            throw error;
+        });
+};
+
 const addSalon = (channelData, callback) => {
   const { nom } = channelData;
   pool.query('INSERT INTO Salons (nom) VALUES ($1) RETURNING *', [nom], (error, results) => {
@@ -98,5 +122,8 @@ module.exports = {
   deleteMessage,
   getMessagesBySalon,
   getAllCountries,
-  getCountryByNom
+  getCountryByNom,
+    getUserCountry,
+    getUserDate,
+    getUserPass
 }
