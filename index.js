@@ -94,6 +94,17 @@ app.get('/settings', async (req, res) => {
     }
 });
 
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error ending session');
+        } else {
+            res.redirect('/home'); // Redirect to home page or login page after logging out
+        }
+    });
+});
+
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 app.use('/', require('./src/routes/index'));

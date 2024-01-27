@@ -20,8 +20,13 @@ const profileView = (req, res) =>{
     res.render("profile", {user, country, date});
 }
 
+const Logout = (req, res) => {
+    res.render("logout");
+}
+
 module.exports =  {
     accountView,
     settingsView,
-    profileView
+    profileView,
+    Logout
 };

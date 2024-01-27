@@ -14,10 +14,11 @@ router.get('/signIn', signInView);
 const {aboutView} = require('../controllers/indexController');
 router.get('/about', aboutView);
 
-const {accountView, settingsView, profileView} = require('../controllers/accountController');
+const {accountView, settingsView, profileView, Logout} = require('../controllers/accountController');
 router.get('/account', accountView);
 router.get('/settings', settingsView);
 router.get('/profile', profileView);
+router.get('/logout', Logout);
 
 
 module.exports = router;
