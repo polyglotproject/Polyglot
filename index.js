@@ -37,6 +37,7 @@ app.post("/signIn/register", (req, res) => {
                 req.session.userName = req.body.user;
                 req.session.userEmail = req.body.email;
                 req.session.country = req.body.flag;
+                req.session.userError = false;
                 res.redirect('/account')            }
         })
         .catch((error) => {
@@ -50,19 +51,20 @@ app.post("/signIn/register", (req, res) => {
 app.post("/signUp/login", async (req, res) => {
     try {
       const { email, password } = req.body;
-  
+
       // Use Promise.all to run both queries concurrently
       const [mdp, mail] = await Promise.all([
         db.getUserPass(email),
         db.getUserEmail(email)
       ]);
-  
-     
-  
+
+
+
       if (mdp && mail && password === mdp.mot_de_passe_hashed && email === mail.email) {
         const userName = await db.getUser(email);
         req.session.userName = userName.nom_utilisateur;
         req.session.userEmail = email;
+        req.session.userError = false;
         const country = await db.getUserCountry(email);
         req.session.country = country.pays_preferee;
         res.redirect('/account');
@@ -73,8 +75,7 @@ app.post("/signUp/login", async (req, res) => {
       console.error(error);
       res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
-  });
-  
+});
 
 app.get('/', (req, res) => {
     res.redirect('/home');
@@ -107,7 +108,8 @@ app.get('/settings', async (req, res) => {
         const userName = req.session.userName;
         const country = req.session.country;
         const userEmail = req.session.userEmail;
-        res.render('settings', { userName, userEmail, country });
+        const error = req.session.userError;
+        res.render('settings', {userName, userEmail, country, error});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -133,6 +135,20 @@ app.post('/updateInfo',  async (req, res) => {
     const countryName = await db.getUserCountry(req.session.userEmail);
     req.session.country = countryName.pays_preferee;
     res.redirect('/settings');
+});
+
+app.post('/updatePass', async (req, res) => {
+    const { oldPass, newPass } = req.body;
+    const mdp = await db.getUserPass(req.session.userEmail);
+    if (oldPass === mdp.mot_de_passe_hashed) {
+        db.updateUserPass(req.session.userEmail, newPass);
+        req.session.userError = false;
+        res.redirect('/settings');
+    }
+    else {
+        req.session.userError = 'Mot de passe incorrect. Veuillez réessayer.';
+        res.redirect('/settings')
+    }
 });
 
 app.use(express.static('public'));

@@ -99,19 +99,22 @@
                         </form>
                     </div>
                 </div>
-                <div class="card mb-4">
+                <div class="card mb-5">
                     <div class="card-header">Modification du mot de passe</div>
                     <div class="card-body">
-                        <form>
+                        <form action="/updatePass" method="post">
+                            <% if (error) { %>
+                                <p class="error-message text-center" style="color: darkred"><%= error %></p>
+                            <% } %>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Mot de passe actuel</label>
-                                <input class="form-control" id="inputUsername" type="password" placeholder="" value="" required>
+                                <input class="form-control" name="oldPass" id="inputUsername" type="password" placeholder="Mot de passe actuel" value="" required>
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Nouveau mot de passe</label>
-                                <input class="form-control" id="inputEmailAddress" type="password" placeholder="" value="" required>
+                                <input class="form-control" name="newPass" id="inputEmailAddress" type="password" placeholder="Nouveau mot de passe" value="" required>
                             </div>
-                            <button class="btn btn-primary modif" type="button">Modifier le mot de passe</button>
+                            <button class="btn btn-primary modif" type="submit">Modifier le mot de passe</button>
                         </form>
                     </div>
                 </div>

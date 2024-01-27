@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'postgres',
+  password: 'butinfo',
   port: 5432,
 })
 const UserExist = (email) => {
@@ -107,6 +107,19 @@ const updateUserInfo = (email, user, country) => {
         }
 }
 
+const updateUserPass = (email, newPass) => {
+    return pool.query('UPDATE Utilisateurs SET mot_de_passe_hashed = $2 WHERE email = $1', [email, newPass]),
+        (error, results) => {
+            if (error) {
+                console.error(error);
+                return false;
+            } else {
+                console.log('Updated successfully');
+                return true;
+            }
+        }
+}
+
 const addSalon = (channelData, callback) => {
   const { nom } = channelData;
   pool.query('INSERT INTO Salons (nom) VALUES ($1) RETURNING *', [nom], (error, results) => {
@@ -169,5 +182,6 @@ module.exports = {
     getUserPass,
     updateUserInfo,
     UserExist,
+    updateUserPass,
     getUserEmail
 }
