@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'butinfo',
+  password: 'postgres', //lol j'ai ton mdp #hacker
   port: 5432,
 })
 const UserExist = (email) => {
@@ -38,10 +38,10 @@ const getUsers = (request, response) => {
     })
   }
   const AddUser = (request, response, callback) => {
-    const { user, email, password, flag } = request.body;
+    const { user, email, password, flag , date_inscription } = request.body;
     pool.query(
-      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, pays_preferee) VALUES ($1, $2, $3, $4)',
-      [user, email, password, flag],
+      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee) VALUES ($1, $2, $3, $4, $5)',
+      [user, email, password, date_inscription, flag],
       (error, results) => {
         if (error) {
           console.error(error);

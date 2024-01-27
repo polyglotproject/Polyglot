@@ -37,6 +37,7 @@ app.post("/signIn/register", (req, res) => {
                 req.session.userName = req.body.user;
                 req.session.userEmail = req.body.email;
                 req.session.country = req.body.flag;
+                req.session.date = req.body.date_inscription;
                 req.session.userError = false;
                 res.redirect('/account')            }
         })
@@ -66,6 +67,8 @@ app.post("/signUp/login", async (req, res) => {
         req.session.userEmail = email;
         req.session.userError = false;
         const country = await db.getUserCountry(email);
+        const date = await db.getUserDate(email);
+        req.session.date_inscription = date.date_inscription;
         req.session.country = country.pays_preferee;
         res.redirect('/account');
       } else {

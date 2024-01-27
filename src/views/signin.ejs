@@ -485,18 +485,27 @@
         if (selectedImage) {
           const selectedFlag = selectedImage.value;
 
-          // Ajoutez le drapeau choisi aux paramètres de l'URL
           const existingInput = document.querySelector('input[name="flag"]');
+          const existingInput2 = document.querySelector('input[name="date_inscription"]');
+
           const registerForm = document.getElementById('register');
 
           // Si un champ existe déjà, supprimez-le
-          if (existingInput) {
+          if (existingInput && existingInput2) {
             existingInput.remove();
+            existingInput2.remove();
           }
+          const dateInscriptionInput = document.createElement('input');
+
+          dateInscriptionInput.type = 'hidden';
+          dateInscriptionInput.name = 'date_inscription';
+          dateInscriptionInput.value = getCurrentDate();
+          
           const hiddenInput = document.createElement('input');
           hiddenInput.type = 'hidden';
           hiddenInput.name = 'flag';
           hiddenInput.value = selectedImage.value;
+          registerForm.appendChild(dateInscriptionInput);
           registerForm.appendChild(hiddenInput);
           console.log("Image selected !" + selectedImage.value)
 
@@ -554,6 +563,13 @@
     console.log(selectedImage.value)
 
   });
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
 
   const urlParams = new URLSearchParams(window.location.search);
 const userExistParam = urlParams.get('userExist');
