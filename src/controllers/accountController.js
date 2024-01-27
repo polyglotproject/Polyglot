@@ -8,13 +8,16 @@ const accountView = (req, res) => {
 
 const settingsView = (req, res) =>{
     const user = db.getUser(req.session.userEmail);
+    const country = db.getUserCountry(req.session.userEmail);
     const userEmail = req.session.userEmail;
-    res.render("settings", {user, userEmail});
+    res.render("settings", {user, userEmail, country});
 }
 
 const profileView = (req, res) =>{
     const user = db.getUser(req.session.userEmail);
-    res.render("profile", {user});
+    const country =  db.getUserCountry(req.session.userEmail);
+    const date = db.getUserDate(req.session.userEmail);
+    res.render("profile", {user, country, date});
 }
 
 module.exports =  {

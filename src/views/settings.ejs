@@ -83,12 +83,13 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputOrgName">Pays</label>
                                 <select class="form-select" aria-label="Default select example">
-                                    <option value="angleterre">Angleterre</option>
-                                    <option value="espagne">Espagne</option>
-                                    <option value="france">France</option>
-                                    <option value="italie">Italie</option>
-                                    <option value="japon">Japon</option>
+                                    <option value="angleterre" <%= country.pays_preferee === 'angleterre' ? 'selected' : '' %>>Angleterre</option>
+                                    <option value="espagne" <%= country.pays_preferee === 'espagne' ? 'selected' : '' %>>Espagne</option>
+                                    <option value="france" <%= country.pays_preferee === 'france' ? 'selected' : '' %>>France</option>
+                                    <option value="italie" <%= country.pays_preferee === 'italie' ? 'selected' : '' %>>Italie</option>
+                                    <option value="japon" <%= country.pays_preferee === 'japon' ? 'selected' : '' %>>Japon</option>
                                 </select>
+
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Adresse mail</label>
