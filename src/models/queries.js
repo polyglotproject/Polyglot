@@ -33,7 +33,7 @@ const getUsers = (request, response) => {
 
 const getUser = (userEmail) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
+        pool.query('SELECT nom_utilisateur,mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail], (error, results) => {
             if (error) {
                 reject(error);
             } else {

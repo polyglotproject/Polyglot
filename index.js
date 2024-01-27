@@ -1,8 +1,11 @@
+// Initialisation
 const express = require('express');
 const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
+const url = require('node:url');
 
+// Configuration
 app.use(express.urlencoded({extended: 'false'}))
 app.use(express.json())
 app.use(session({
@@ -13,6 +16,7 @@ app.use(session({
 
 app.set('view engine', 'ejs');
 app.set('views' , "./src/views");
+
 
 //Routes
 const PORT = process.env.PORT || 4111;
@@ -36,6 +40,42 @@ app.get('/', (req, res) => {
     res.redirect('/home');
 });
 
+
+// SignIn POST
+app.post("/signIn/register", (req, res) => {
+    try{
+        const { user, email, password, flag } = req.body;
+        db.AddUser(req,res);
+        req.session.userEmail = email;
+        res.redirect('/account')
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).send('Erreur lors de l\'inscription de l\'utilisateur');
+    }
+})
+
+
+// SignUp POST
+app.post("/account", async (req, res) => {
+    try{
+        const { email, password} = req.body;
+        const user = await db.getUser(email);
+        if (password === user.mot_de_passe_hashed) {
+            res.render('account', {user});
+        }
+        else{
+            res.redirect('/signUp');
+        }
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+})
+
+function test(){
+
 app.get('/account', async (req, res) => {
     try {
         const user = await db.getUser(req.session.userEmail);
@@ -45,6 +85,7 @@ app.get('/account', async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
 });
+}
 
 app.get('/profile', async (req, res) => {
     try {
