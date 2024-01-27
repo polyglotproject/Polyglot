@@ -118,6 +118,16 @@ app.get('/logout', (req, res) => {
     });
 });
 
+app.post('/updateInfo',  async (req, res) => {
+    const { user, country } = req.body;
+    db.updateUserInfo(req.session.userEmail, user, country);
+    const userName = await db.getUser(req.session.userEmail);
+    req.session.userName = userName.nom_utilisateur;
+    const countryName = await db.getUserCountry(req.session.userEmail);
+    req.session.country = countryName.pays_preferee;
+    res.redirect('/settings');
+});
+
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 app.use('/', require('./src/routes/index'));

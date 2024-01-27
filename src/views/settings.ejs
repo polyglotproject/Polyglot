@@ -75,27 +75,27 @@
                 <div class="card mb-4">
                     <div class="card-header">Informations liées au compte</div>
                     <div class="card-body">
-                        <form>
+                        <form action="/updateInfo" method="post">
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Nom d'utilisateur</label>
-                                <input class="form-control" id="inputUsername" type="text" placeholder="<%= userName %>" value="">
+                                <input class="form-control" id="inputUsername" name="user" type="text" placeholder="Nom d'utilisateur" value="<%= userName %>">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputOrgName">Pays</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="angleterre" <%= country === 'angleterre' ? 'selected' : '' %>>Angleterre</option>
-                                    <option value="espagne" <%= country === 'espagne' ? 'selected' : '' %>>Espagne</option>
-                                    <option value="france" <%= country === 'france' ? 'selected' : '' %>>France</option>
-                                    <option value="italie" <%= country === 'italie' ? 'selected' : '' %>>Italie</option>
-                                    <option value="japon" <%= country === 'japon' ? 'selected' : '' %>>Japon</option>
+                                <select class="form-select" name="country" aria-label="Default select example">
+                                    <option name="country" value="angleterre" <%= country === 'angleterre' ? 'selected' : '' %>>Angleterre</option>
+                                    <option name="country" value="espagne" <%= country === 'espagne' ? 'selected' : '' %>>Espagne</option>
+                                    <option name="country" value="france" <%= country === 'france' ? 'selected' : '' %>>France</option>
+                                    <option name="country" value="italie" <%= country === 'italie' ? 'selected' : '' %>>Italie</option>
+                                    <option name="country" value="japon" <%= country === 'japon' ? 'selected' : '' %>>Japon</option>
                                 </select>
 
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputEmailAddress">Adresse mail</label>
-                                <input class="form-control" id="inputEmailAddress" type="email" placeholder="<%= userEmail %>" value="" disabled>
+                                <input class="form-control" id="inputEmailAddress" type="email" name="email" placeholder="<%= userEmail %>" value="" disabled>
                             </div>
-                            <button class="btn btn-primary modif" type="button">Modifier les changements</button>
+                            <button class="btn btn-primary modif" type="submit">Modifier les changements</button>
                         </form>
                     </div>
                 </div>
