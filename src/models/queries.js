@@ -5,7 +5,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'butinfo',
+  password: 'postgres',
   port: 5432,
 })
 const UserExist = (email) => {
@@ -63,11 +63,19 @@ const getUser = (userEmail) => {
 };
 
 const getUserPass = (userEmail) => {
-    return pool.query('SELECT mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
-        .then((results) => results.rows[0])
-        .catch((error) => {
-            throw error;
-        });
+  return new Promise((resolve, reject) => {
+    pool.query('SELECT mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
+      .then((results) => resolve(results.rows[0]))
+      .catch((error) => reject(error));
+  });
+};
+
+const getUserEmail = (userEmail) => {
+  return new Promise((resolve, reject) => {
+    pool.query('SELECT email FROM Utilisateurs WHERE email = $1', [userEmail])
+      .then((results) => resolve(results.rows[0]))
+      .catch((error) => reject(error));
+  });
 };
 
 const getUserCountry = (userEmail) => {
@@ -160,5 +168,6 @@ module.exports = {
     getUserDate,
     getUserPass,
     updateUserInfo,
-    UserExist
+    UserExist,
+    getUserEmail
 }

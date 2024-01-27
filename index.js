@@ -49,25 +49,32 @@ app.post("/signIn/register", (req, res) => {
 
 app.post("/signUp/login", async (req, res) => {
     try {
-        const { email, password } = req.body;
-        const mdp = await db.getUserPass(email);
-
-        if (password === mdp.mot_de_passe_hashed) {
-            const userName = await db.getUser(email);
-            req.session.userName = userName.nom_utilisateur;
-            req.session.userEmail = email;
-            const country = await db.getUserCountry(email);
-            req.session.country = country.pays_preferee;
-            res.redirect('/account')
-        } else {
-            res.redirect('/signUp');
-        }
+      const { email, password } = req.body;
+  
+      // Use Promise.all to run both queries concurrently
+      const [mdp, mail] = await Promise.all([
+        db.getUserPass(email),
+        db.getUserEmail(email)
+      ]);
+  
+     
+  
+      if (mdp && mail && password === mdp.mot_de_passe_hashed && email === mail.email) {
+        const userName = await db.getUser(email);
+        req.session.userName = userName.nom_utilisateur;
+        req.session.userEmail = email;
+        const country = await db.getUserCountry(email);
+        req.session.country = country.pays_preferee;
+        res.redirect('/account');
+      } else {
+        res.redirect('/signUp?credentialsError=true');
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
-    catch (error) {
-        console.error(error);
-        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
-    }
-});
+  });
+  
 
 app.get('/', (req, res) => {
     res.redirect('/home');
