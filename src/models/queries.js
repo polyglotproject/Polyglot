@@ -159,6 +159,6 @@ module.exports = {
     getUserCountry,
     getUserDate,
     getUserPass,
-    updateUserInfo
-
+    updateUserInfo,
+    UserExist
 }
