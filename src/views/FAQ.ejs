@@ -1,72 +1,177 @@
 <%- include('header.ejs'); %>
-<div class="container py-5">
-    <h2 class="text-center mb-4">Frequently Asked Questions</h2>
-    <div class="accordion" id="faqAccordion">
-        <!-- Question 1 -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    Qu'est ce que Polyglot ?
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Polyglot est une plateforme d'échange conçue pour permettre aux utilisateurs d'apprendre de nouvelles langues, d'améliorer leurs compétences linguistiques et de découvrir de nouvelles cultures.                </div>
-            </div>
-        </div>
-        <!-- Question 2 -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Comment fonctionne Polyglot ?
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Une fois que l'utilisateur a créé son compte, il a accès à une carte interactive du monde. En cliquant sur un pays de la carte, l'utilisateur est redirigé vers un espace dédié à ce pays en question, dans lequel il peut se déplacer, interagir avec d'autres utilisateurs et découvrir divers éléments culturels et linguistiques liés à ce pays.                 </div>
-            </div>
-        </div>
-        <!-- Question 3 -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Quelles langues puis-je apprendre sur Polyglot ?
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Les langues que vous pouvez apprendre actuellement sur Polyglot sont l'anglais, le français, l'italien, l'espagnol et le japonais. Ces langues sont associées aux pays disponibles sur la plateforme, tels que l'Angleterre, la France, l'Italie, l'Espagne et le Japon. Notre équipe travaille activement pour ajouter d'autres pays et donc d'autres langues à l'avenir, afin d'offrir à nos utilisateurs une expérience d'apprentissage encore plus diversifiée.
+<div class="faq_area section_padding_130" id="faq">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-lg-6">
+                <!-- Section Heading-->
+                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <h3><span>Frequently </span> Asked Questions</h3>
+                    <p>Aprennez-en plus sur Polyglot.</p>
+                    <div class="line"></div>
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    Pourquoi suis-je invité(e) à sélectionner mon pays lors de mon inscription sur Polyglot ?
-                </button>
-            </h2>
-            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Lors de l'inscription sur Polyglot, nous demandons à nos utilisateurs de sélectionner leur pays pour représenter leur origine géographique sur leur profil. Cette représentation visuelle aide les autres utilisateurs à trouver plus facilement des personnes natives dans la langue qu'ils souhaitent apprendre. Cela favorise ainsi les échanges culturels et linguistiques en permettant aux utilisateurs de se connecter avec des locuteurs natifs de la langue cible, facilitant ainsi l'apprentissage et la pratique des langues de manière authentique.
+        <div class="row justify-content-center">
+            <!-- FAQ Area-->
+            <div class="col-12 col-sm-10 col-lg-8">
+                <div class="accordion faq-accordian" id="faqAccordion">
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingOne">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Qu'est ce que Polyglot ?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Polyglot est une plateforme d'échange conçue pour permettre aux utilisateurs d'apprendre de nouvelles langues,  d'améliorer leurs compétences linguistiques et de découvrir de nouvelles cultures.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingTwo">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Comment fonctionne Polyglot ?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Une fois que l'utilisateur a créé son compte, il a accès à une carte interactive du monde. </p>
+                                <p>En cliquant sur un pays de la carte, l'utilisateur est redirigé vers un espace dédié à ce pays en question, dans lequel il peut se déplacer, interagir avec d'autres utilisateurs et découvrir divers éléments culturels et linguistiques liés à ce pays.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingThree">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Quelles langues puis-je apprendre sur Polyglot ?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Les langues que vous pouvez apprendre actuellement sur Polyglot sont l'anglais, le français, l'italien, l'espagnol et le japonais. Ces langues sont associées aux pays disponibles sur la plateforme, tels que l'Angleterre, la France, l'Italie, l'Espagne et le Japon. </p>
+                                <p>Notre équipe travaille activement pour ajouter d'autres pays et donc d'autres langues à l'avenir, afin d'offrir à nos utilisateurs une expérience d'apprentissage encore plus diversifiée.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingFour">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Pourquoi suis-je invité(e) à sélectionner mon pays lors de mon inscription sur Polyglot ?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseFour" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Lors de l'inscription sur Polyglot, nous demandons à nos utilisateurs de sélectionner leur pays pour représenter leur origine géographique sur leur profil. </p>
+                                <p>Cette représentation visuelle aide les autres utilisateurs à trouver plus facilement des personnes natives dans la langue qu'ils souhaitent apprendre. Cela favorise ainsi les échanges culturels et linguistiques en permettant aux utilisateurs de se connecter avec des locuteurs natifs de la langue cible, facilitant ainsi l'apprentissage et la pratique des langues de manière authentique.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-0 wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <div class="card-header" id="headingFive">
+                            <h6 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">Comment puis-je trouver des partenaires linguistiques sur Polyglot ?<span class="lni-chevron-up"></span></h6>
+                        </div>
+                        <div class="collapse" id="collapseFive" aria-labelledby="headingFive" data-parent="#faqAccordion">
+                            <div class="card-body">
+                                <p>Vous pouvez explorer les différents espaces sur la carte interactive pour trouver des utilisateurs dans votre pays ou dans le pays de la langue que vous souhaitez apprendre. De plus, vous pouvez ajouter des utilisateurs en tant qu'amis pour rester en contact avec eux.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFive">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                    Comment puis-je trouver des partenaires linguistiques sur Polyglot ?
-                </button>
-            </h2>
-            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Vous pouvez explorer les différents espaces sur la carte interactive pour trouver des utilisateurs dans votre pays ou dans le pays de la langue que vous souhaitez apprendre. De plus, vous pouvez ajouter des utilisateurs en tant qu'amis pour rester en contact avec eux.
+                <!-- Support Button-->
+                <div class="support-button text-center d-flex align-items-center justify-content-center mt-4 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                    <i class="lni-emoji-sad"></i>
+                    <p class="mb-0 px-2">Besoin de support?</p>
+                    <a href="#"> Contacter nous</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    body{margin-top:20px;}
+.section_padding_130 {
+    padding-top: 130px;
+    padding-bottom: 130px;
+}
+.faq_area {
+    position: relative;
+    z-index: 1;
+    background-color: #f5f5ff;
+}
+
+.faq-accordian {
+    position: relative;
+    z-index: 1;
+}
+.faq-accordian .card {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+.faq-accordian .card:last-child {
+    margin-bottom: 0;
+}
+.faq-accordian .card .card-header {
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom-color: #ebebeb;
+}
+.faq-accordian .card .card-header h6 {
+    cursor: pointer;
+    padding: 1.75rem 2rem;
+    color: #3f43fd;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -ms-grid-row-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.faq-accordian .card .card-header h6 span {
+    font-size: 1.5rem;
+}
+.faq-accordian .card .card-header h6.collapsed {
+    color: #070a57;
+}
+.faq-accordian .card .card-header h6.collapsed span {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+.faq-accordian .card .card-body {
+    padding: 1.75rem 2rem;
+}
+.faq-accordian .card .card-body p:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 575px) {
+    .support-button p {
+        font-size: 14px;
+    }
+}
+
+.support-button i {
+    color: #3f43fd;
+    font-size: 1.25rem;
+}
+@media only screen and (max-width: 575px) {
+    .support-button i {
+        font-size: 1rem;
+    }
+}
+
+.support-button a {
+    text-transform: capitalize;
+    color: #2ecc71;
+}
+@media only screen and (max-width: 575px) {
+    .support-button a {
+        font-size: 13px;
+    }
+}
+</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
 <%- include('footer.ejs'); %>
