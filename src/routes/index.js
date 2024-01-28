@@ -5,6 +5,8 @@ const router = express.Router();
 const {homeView} = require('../controllers/indexController');
 router.get('/home', homeView);
 
+
+
 const {signUpView} = require('../controllers/indexController');
 router.get('/signUp', signUpView);
 
@@ -19,6 +21,9 @@ router.get('/account', accountView);
 router.get('/settings', settingsView);
 router.get('/profile', profileView);
 router.get('/logout', Logout);
+
+const {generalView} = require('../controllers/indexController');
+router.get('/general', homeView);
 
 
 module.exports = router;

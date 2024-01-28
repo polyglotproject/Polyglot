@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Ajouter le lien vers la bibliothèque Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Ajoutez votre propre style ici */
+    body {
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .chat-container {
+      width: 25%;
+      height: 100vh;
+      background-color: #f8f9fa;
+      float: left;
+      overflow: auto;
+      position: relative;
+    }
+
+    .content-container {
+      width: 75%;
+      float: left;
+      padding: 20px;
+    }
+
+    .send-messages {
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .send-messages input {
+      flex: 1;
+      margin-right: 10px;
+      border-radius: .4em ;
+      border-color: #abd1f8;
+    }
+
+    .message-container {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: left;
+      overflow-y: auto;
+      max-height: 70vh;
+    }
+
+    .message {
+      background-color: #e0e0e0;
+      padding: 8px 12px;
+      margin-bottom: 4px;
+      margin-top: 20px;
+      margin-left: 20px;
+      border-radius: .4em;
+      max-width: 50%;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    .message strong {
+      color: #1da1f2;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .settings-icon {
+      margin: 15px 15px;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      color: #ffffff;
+      background-color:  #007bff;
+      padding: 10px 10px;
+      border-radius: .65em;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .settings-icon:hover{
+        color: #abd1f8;
+
+    }
+  </style>
+  <title>Chat avec Image</title>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="chat-container" id="chat">
+        <div class="message-container" id="messageContainer">
+          <!-- Nouveaux messages apparaîtront ici -->
+          <div class="message">
+            <strong>Joe :</strong> dd
+          </div>
+        </div>
+        <div class="send-messages">
+          <input type="text" placeholder="Saisissez votre message">
+          <button class="btn btn-primary" onclick="sendMessage()">Envoyer</button>
+        </div>
+      </div>
+      <div class="content-container">
+       
+        
+      </div>
+    </div>
+    <a href="/account">
+    <i class="settings-icon fas fa-cog fa-2x" ></i>
+</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function sendMessage() {
+      var chatContainer = document.getElementById('chat');
+      var messageContainer = document.getElementById('messageContainer');
+      var newMessageContainer = document.createElement('div');
+      newMessageContainer.classList.add('message');
+      var senderName = 'Joe'; // Nom de l'expéditeur (peut être dynamique)
+      newMessageContainer.innerHTML = '<strong>' + senderName + ':</strong> ' + document.querySelector('.send-messages input').value;
+      messageContainer.appendChild(newMessageContainer);
+      document.querySelector('.send-messages input').value = ''; // Efface le champ de texte après l'envoi du message
+    }
+  </script>
+
+</body>
+
+</html>

@@ -33,7 +33,10 @@ const { homeView } = require("./src/controllers/indexController");
 const { router } = require("express/lib/application");
 app.get('/users', db.getUsers);
 
-app.post("/signIn/register", (req, res) => {
+app.post("/signIn/verification", (req, res) => {
+
+})
+    app.post("/signIn/register", (req, res) => {
     console.log(req.body);
     const email = req.body.email;
     db.UserExist(email)
@@ -168,7 +171,17 @@ app.post('/updatePass', async (req, res) => {
         res.redirect('/settings')
     }
 });
-
+app.get('/general', async (req, res) => {
+    try {
+        const userName = req.session.userName;
+        const country = req.session.country;
+        const userEmail = req.session.userEmail;
+        res.render('general', {userName, userEmail, country});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
 app.use(express.static('public'));
 app.use('/images', express.static('images'));
 app.use('/', require('./src/routes/index'));
