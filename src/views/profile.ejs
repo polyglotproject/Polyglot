@@ -285,9 +285,9 @@
             const selectedAvatarNumberInput = document.getElementById('selectedAvatarNumber');
             const avatarOptions = document.querySelectorAll('.avatar-option');
             const currentAvatarImage = document.querySelector('#currentavatar');
-            const currentimage = <%= avatar.avatar %>;
+            const currentimage = <%- avatar.avatar %>;
             currentAvatarImage.src = allImages[currentimage];
-            const statusButton = document.querySelector('#statusButton');
+            const statusButton = document.getElementById('statusButton');
             const dropdownItems = document.querySelectorAll('.dropdown-item');
             const currentstatut = <%- statut.statut %>;  // Assuming statut is a variable in EJS
 
@@ -372,7 +372,7 @@
                 item.addEventListener('click', function () {
                     const id = parseInt(item.id);
                     const color = getSelectedColor(id);
-                    console.log("TRAPP");
+                    console.log(id);
                     statusButton.style.backgroundColor = color;
                     statusButton.style.borderColor = color;
 

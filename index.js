@@ -36,22 +36,28 @@ app.get('/users', db.getUsers);
 app.post("/signIn/verification", (req, res) => {
 
 })
-app.post("/updateStatut", (req, res) => {
+app.post("/updateStatut", async (req, res) => {
+    if(req.body.statut !== null){
     if(db.getUserStatut !== req.body.statut){
-        db.updateUserStatut(req.session.userEmail,req.body.statut);
+        console.log("statut changed")
+        await db.updateUserStatut(req.session.userEmail,req.body.statut);
         
     }
     else{
         console.log("same statut")
     }
+    }
 })
 app.post("/updateAvatar", (req, res) => {
+    if(req.body.avatar !== null){
+
     if(db.getUserAvatar !== req.body.avatar){
-        db.updateUserAvatar(req.session.userEmail,req.body.avatar);
+         db.updateUserAvatar(req.session.userEmail,req.body.avatar);
     }
     else{
         console.log("same avatar")
     }
+}
 })
     app.post("/signIn/register", (req, res) => {
     console.log(req.body);
