@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'sofiane', //lol j'ai ton mdp #hacker
+  password: 'butinfo', //lol j'ai ton mdp #hacker
   port: 5432,
 })
 async function hashPassword(password) {

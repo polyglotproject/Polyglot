@@ -16,6 +16,9 @@ router.get('/signIn', signInView);
 const {aboutView} = require('../controllers/indexController');
 router.get('/about', aboutView);
 
+const {FAQView} = require('../controllers/indexController');
+router.get('/FAQ', FAQView);
+
 const {accountView, settingsView, profileView, Logout, friendsView} = require('../controllers/accountController');
 router.get('/account', accountView);
 router.get('/settings', settingsView);

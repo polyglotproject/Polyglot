@@ -1,0 +1,72 @@
+<%- include('header.ejs'); %>
+<div class="container py-5">
+    <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+        <!-- Question 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Qu'est ce que Polyglot ?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Polyglot est une plateforme d'échange conçue pour permettre aux utilisateurs d'apprendre de nouvelles langues, d'améliorer leurs compétences linguistiques et de découvrir de nouvelles cultures.                </div>
+            </div>
+        </div>
+        <!-- Question 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Comment fonctionne Polyglot ?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Une fois que l'utilisateur a créé son compte, il a accès à une carte interactive du monde. En cliquant sur un pays de la carte, l'utilisateur est redirigé vers un espace dédié à ce pays en question, dans lequel il peut se déplacer, interagir avec d'autres utilisateurs et découvrir divers éléments culturels et linguistiques liés à ce pays.                 </div>
+            </div>
+        </div>
+        <!-- Question 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Quelles langues puis-je apprendre sur Polyglot ?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Les langues que vous pouvez apprendre actuellement sur Polyglot sont l'anglais, le français, l'italien, l'espagnol et le japonais. Ces langues sont associées aux pays disponibles sur la plateforme, tels que l'Angleterre, la France, l'Italie, l'Espagne et le Japon. Notre équipe travaille activement pour ajouter d'autres pays et donc d'autres langues à l'avenir, afin d'offrir à nos utilisateurs une expérience d'apprentissage encore plus diversifiée.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Pourquoi suis-je invité(e) à sélectionner mon pays lors de mon inscription sur Polyglot ?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Lors de l'inscription sur Polyglot, nous demandons à nos utilisateurs de sélectionner leur pays pour représenter leur origine géographique sur leur profil. Cette représentation visuelle aide les autres utilisateurs à trouver plus facilement des personnes natives dans la langue qu'ils souhaitent apprendre. Cela favorise ainsi les échanges culturels et linguistiques en permettant aux utilisateurs de se connecter avec des locuteurs natifs de la langue cible, facilitant ainsi l'apprentissage et la pratique des langues de manière authentique.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Comment puis-je trouver des partenaires linguistiques sur Polyglot ?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Vous pouvez explorer les différents espaces sur la carte interactive pour trouver des utilisateurs dans votre pays ou dans le pays de la langue que vous souhaitez apprendre. De plus, vous pouvez ajouter des utilisateurs en tant qu'amis pour rester en contact avec eux.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<%- include('footer.ejs'); %>

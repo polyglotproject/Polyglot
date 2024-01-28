@@ -14,9 +14,14 @@ const aboutView = (req, res) =>{
     res.render("about", {});
 }
 
+const FAQView = (req, res) =>{
+    res.render("FAQ", {});
+}
+
 module.exports =  {
     homeView,
     signUpView,
     signInView,
-    aboutView
+    aboutView,
+    FAQView
 };

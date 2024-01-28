@@ -65,11 +65,24 @@
     </div>
 </div>
 <div class="container-fluid px-0" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-6">
-
-            </div>
+    <div class="container py-5">
+        <h1 class="mb-4">Liste des Amis</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% friends.forEach((friend) => { %>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">@<%= friend.nom_utilisateur %></h4>
+                            <p class="card-text">Pays représenté: <%= friend.pays_preferee %></p>
+                            <p class="card-text"><small class="text-body-secondary">Inscrit le <%= date.date_inscription.toLocaleDateString('fr-FR', {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric',
+                                    }); %></small></p>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
         </div>
     </div>
 </div>
