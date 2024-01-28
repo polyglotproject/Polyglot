@@ -1,3 +1,3 @@
 ### Initializing...
-Nodejs package needed : Express, Ejs, Pg, Bcryptjs, Express-Session <br/>
-command to install :  npm install express ejs pg bcryptjs express-session
+Nodejs package needed : Express, Ejs, Pg, Bcryptjs, Express-Session, Socket.io <br/>
+command to install :  npm install express ejs pg bcryptjs express-session socket.io
