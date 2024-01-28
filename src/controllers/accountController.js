@@ -14,11 +14,13 @@ const settingsView = (req, res) =>{
     res.render("settings", {userName, userEmail, country});
 }
 
-const profileView = (req, res) =>{
-    const userName = db.getUser(req.session.userEmail);
-    const country =  db.getUserCountry(req.session.userEmail);
+const profileView = async (req, res) =>{
+    const userName = await db.getUser(req.session.userEmail);
+    const country =  awidb.getUserCountry(req.session.userEmail);
     const date = db.getUserDate(req.session.userEmail);
-    res.render("profile", {userName, country, date});
+    const mystatut = db.getUserStatut(req.session.userEmail);
+    const myavatar = db.getUserAvatar(req.session.userEmail);
+    res.render("profile", {userName, country, date, mystatut, myavatar});
 }
 
 const friendsView = (req, res) =>{
