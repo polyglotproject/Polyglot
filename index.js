@@ -161,7 +161,8 @@ app.post('/updateInfo',  async (req, res) => {
 app.post('/updatePass', async (req, res) => {
     const { oldPass, newPass } = req.body;
     const mdp = await db.getUserPass(req.session.userEmail);
-    if (oldPass === mdp.mot_de_passe_hashed) {
+    const isPasswordMatch = await verifyPassword(oldPass, mdp.mot_de_passe_hashed);
+    if (isPasswordMatch) {
         db.updateUserPass(req.session.userEmail, newPass);
         req.session.userError = false;
         res.redirect('/settings');

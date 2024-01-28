@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'postgres', //lol j'ai ton mdp #hacker
+  password: 'butinfo', //lol j'ai ton mdp #hacker
   port: 5432,
 })
 async function hashPassword(password) {
@@ -118,8 +118,9 @@ const updateUserInfo = (email, user, country) => {
         }
 }
 
-const updateUserPass = (email, newPass) => {
-    return pool.query('UPDATE Utilisateurs SET mot_de_passe_hashed = $2 WHERE email = $1', [email, newPass]),
+const updateUserPass = async (email, newPass) => {
+    const hash_pass = await hashPassword(newPass);
+    return pool.query('UPDATE Utilisateurs SET mot_de_passe_hashed = $2 WHERE email = $1', [email, hash_pass]),
         (error, results) => {
             if (error) {
                 console.error(error);
