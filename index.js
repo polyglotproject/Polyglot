@@ -137,6 +137,16 @@ app.get('/settings', async (req, res) => {
     }
 });
 
+app.get('/friends', async (req, res) => {
+    try {
+        const userName = req.session.userName;
+        res.render('friends', {userName});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
+
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {

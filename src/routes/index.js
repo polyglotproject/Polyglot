@@ -16,10 +16,11 @@ router.get('/signIn', signInView);
 const {aboutView} = require('../controllers/indexController');
 router.get('/about', aboutView);
 
-const {accountView, settingsView, profileView, Logout} = require('../controllers/accountController');
+const {accountView, settingsView, profileView, Logout, friendsView} = require('../controllers/accountController');
 router.get('/account', accountView);
 router.get('/settings', settingsView);
 router.get('/profile', profileView);
+router.get('/friends', friendsView);
 router.get('/logout', Logout);
 
 const {generalView} = require('../controllers/indexController');
