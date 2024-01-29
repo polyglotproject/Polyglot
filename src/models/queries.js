@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'postgres', //lol j'ai ton mdp #hacker
+  password: 'butinfo', //lol j'ai ton mdp #hacker
   port: 5432,
 })
 async function hashPassword(password) {
@@ -50,9 +50,11 @@ const getUsers = (request, response) => {
   const AddUser = async (request, response, callback) => {
     const { user, email, password, flag , date_inscription } = request.body;
     const hash_pass = await hashPassword(request.body.password);
+    const statut = 1 ;
+    const avatar = 1 ;
     pool.query(
-      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee) VALUES ($1, $2, $3, $4, $5)',
-      [user, email, hash_pass, date_inscription, flag],
+      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee, statut, avatar) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [user, email, hash_pass, date_inscription, flag, statut, avatar],
       (error, results) => {
         if (error) {
           console.error(error);
@@ -73,6 +75,23 @@ const getUser = (userEmail) => {
         });
 };
 
+const getUserStatut = (userEmail) => {
+
+  return pool.query('SELECT statut FROM Utilisateurs WHERE email = $1', [userEmail])
+  .then((results) => results.rows[0])
+  .catch((error) => {
+      throw error;
+  });
+};
+
+const getUserAvatar = (userEmail) => {
+
+  return pool.query('SELECT avatar FROM Utilisateurs WHERE email = $1', [userEmail])
+  .then((results) => results.rows[0])
+  .catch((error) => {
+      throw error;
+  });
+};
 const getUserPass = (userEmail) => {
   return new Promise((resolve, reject) => {
     pool.query('SELECT mot_de_passe_hashed FROM Utilisateurs WHERE email = $1', [userEmail])
@@ -118,8 +137,9 @@ const updateUserInfo = (email, user, country) => {
         }
 }
 
-const updateUserPass = (email, newPass) => {
-    return pool.query('UPDATE Utilisateurs SET mot_de_passe_hashed = $2 WHERE email = $1', [email, newPass]),
+const updateUserPass = async (email, newPass) => {
+    const hash_pass = await hashPassword(newPass);
+    return pool.query('UPDATE Utilisateurs SET mot_de_passe_hashed = $2 WHERE email = $1', [email, hash_pass]),
         (error, results) => {
             if (error) {
                 console.error(error);
@@ -131,6 +151,32 @@ const updateUserPass = (email, newPass) => {
         }
 }
 
+const updateUserStatut = async (email, statut) => {
+  
+  return pool.query('UPDATE Utilisateurs SET statut = $2 WHERE email = $1', [email, statut]),
+      (error, results) => {
+          if (error) {
+              console.error(error);
+              return false;
+          } else {
+              console.log('Updated successfully');
+              return true;
+          }
+      }
+}
+const updateUserAvatar = async (email, avatar) => {
+  
+  return pool.query('UPDATE Utilisateurs SET avatar = $2 WHERE email = $1', [email, avatar]),
+      (error, results) => {
+          if (error) {
+              console.error(error);
+              return false;
+          } else {
+              console.log('Updated successfully');
+              return true;
+          }
+      }
+}
 const addSalon = (channelData, callback) => {
   const { nom } = channelData;
   pool.query('INSERT INTO Salons (nom) VALUES ($1) RETURNING *', [nom], (error, results) => {
@@ -194,5 +240,9 @@ module.exports = {
     updateUserInfo,
     UserExist,
     updateUserPass,
-    getUserEmail
+    getUserEmail,
+    getUserStatut,
+    updateUserStatut,
+    updateUserAvatar,
+    getUserAvatar
 }

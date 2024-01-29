@@ -1,212 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Polyglot</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" id="bootstrap-css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"
+        id="bootstrap-css">
     <style>
         .nav-pills .nav-item .nav-link.active {
             background-color: #044980;
         }
+
         .modif {
             background-color: #044980;
             border: #044980;
         }
-        .card{
+
+        .card {
             padding: 1.5em .5em .5em;
             border-radius: 2em;
             text-align: center;
-            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
         }
-        .card-title{
+
+        .card-title {
             font-weight: 700;
             font-size: 1.5em;
         }
+
         .btn-narrow {
             width: 60%;
         }
     </style>
 </head>
+
 <body class="d-flex">
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh;">
-    <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-        <img src="images/logo.png" height="50px">
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="/account" class="nav-link text-black">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-                    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
-                </svg>
-                Accueil
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/settings" class="nav-link text-black" aria-current="page">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
-                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
-                </svg>
-                Paramètres
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="/profile" class="nav-link active text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                </svg>
-                Profil
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link text-black">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
-                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
-                </svg>
-                Amis
-            </a>
-        </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <strong><%= userName %></strong>
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh;">
+        <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <img src="images/logo.png" height="50px">
         </a>
-        <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/account" class="nav-link text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house" viewBox="0 0 16 16">
+                        <path
+                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                    </svg>
+                    Accueil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/settings" class="nav-link text-black" aria-current="page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-gear" viewBox="0 0 16 16">
+                        <path
+                            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                        <path
+                            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                    </svg>
+                    Paramètres
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/profile" class="nav-link active text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                    Profil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/friends" class="nav-link text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-people" viewBox="0 0 16 16">
+                        <path
+                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                    </svg>
+                    Amis
+                </a>
+            </li>
         </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <strong>
+                    <%= userName %>
+                </strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+            </ul>
+        </div>
     </div>
-</div>
-<div class="container-fluid px-0" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-6">
-                <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-                    <div class="card" style="width: 20rem;">
-                        <img src="/images/default.png" class="card-img-top mx-auto" alt="..." style="width: 80%">
-                        <button type="button" class="btn btn-primary modif btn-narrow mx-auto" data-bs-toggle="modal" data-bs-target="#avatarModal">
-                            Changer d'avatar
-                        </button>
-                        <hr>
-                        <div class="card-body">
-                            <h4 class="card-title">@<%= userName %></h4>
-                            <p class="card-text">Pays représenté : <%= country %></p>
-                            <p class="card-text"><small class="text-body-secondary">Inscrit le <%= date.date_inscription.toLocaleDateString('fr-FR', {
-                                day: 'numeric',
-                                month: 'long', 
-                                year: 'numeric',
-                              }); %></small></p>
+    <div class="container-fluid px-0" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-6">
+                    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                        <div class="card position-relative" style="width: 20rem;">
+                            <img src="/images/default.png" class="card-img-top mx-auto" alt="..." style="width: 80%"
+                                id="currentavatar">
+
+                            <button type="button" id="statusButton"
+                                class="btn btn-secondary dropdown-toggle-split position-absolute"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                style="bottom: 14.5em; right: 6em; border-radius: 2em; padding: 17px; background-color: green; border-color: green; color: white;">
+                                <span style="color: white;"></span>
+                            </button>
+
+                            <button type="button" class="btn btn-primary modif btn-narrow mx-auto"
+                                data-bs-toggle="modal" data-bs-target="#avatarModal">
+                                Changer d'avatar
+                            </button>
+
+                            <hr>
+                            <div class="btn-group dropright">
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#" style="color: green;" id="1">En ligne</a>
+                                    <a class="dropdown-item" href="#" style="color: red;" id="2">Ne pas déranger</a>
+                                    <a class="dropdown-item" href="#" style="color: orange;" id="3">Inactif</a>
+                                    <a class="dropdown-item" href="#" style="color: rgb(40, 40, 40);" id="4">Hors
+                                        ligne</a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">@<%= userName %>
+                                </h4>
+
+                                <p class="card-text">Pays représenté : <%= country %>
+                                </p>
+                                <p class="card-text"><small class="text-body-secondary">Inscrit le <%=
+                                            date.date_inscription.toLocaleDateString('fr-FR', { day: 'numeric' ,
+                                            month: 'long' , year: 'numeric' , }); %></small></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Choisir un nouvel avatar</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar1" value="/images/default.png">
-                            <label class="form-check-label" for="avatar1">
-                                <img src="/images/default.png" style="width: 150%" alt="Avatar 1">
-                            </label>
+
+
+
+
+    <div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Choisir un nouvel avatar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar1" value="/images/default.png" data-avatar-number="1">
+                                <label class="form-check-label" for="avatar1">
+                                    <img src="/images/default.png" style="width: 150%" alt="Avatar 1">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar2" value="/images/f1.png" data-avatar-number="2">
+                                <label class="form-check-label" for="avatar2">
+                                    <img src="/images/f1.png" style="width: 165%" alt="Avatar 2">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar3" value="/images/f2.png" data-avatar-number="3">
+                                <label class="form-check-label" for="avatar3">
+                                    <img src="/images/f2.png" style="width: 165%" alt="Avatar 3">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar2" value="/images/f1.png">
-                            <label class="form-check-label" for="avatar2">
-                                <img src="/images/f1.png" style="width: 165%" alt="Avatar 2">
-                            </label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar4" value="/images/f3.png" data-avatar-number="4">
+                                <label class="form-check-label" for="avatar4">
+                                    <img src="/images/f3.png" style="width: 165%" alt="Avatar 4">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar5" value="/images/f4.png" data-avatar-number="5">
+                                <label class="form-check-label" for="avatar5">
+                                    <img src="/images/f4.png" style="width: 165%" alt="Avatar 5">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar6" value="/images/g1.png" data-avatar-number="6">
+                                <label class="form-check-label" for="avatar6">
+                                    <img src="/images/g1.png" style="width: 165%" alt="Avatar 2">
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar3" value="/images/f2.png">
-                            <label class="form-check-label" for="avatar3">
-                                <img src="/images/f2.png" style="width: 165%" alt="Avatar 3">
-                            </label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar7" value="/images/g2.png" data-avatar-number="7">
+                                <label class="form-check-label" for="avatar7">
+                                    <img src="/images/g2.png" style="width: 165%" alt="Avatar 3">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar8" value="/images/g3.png" data-avatar-number="8">
+                                <label class="form-check-label" for="avatar8">
+                                    <img src="/images/g3.png" style="width: 165%" alt="Avatar 4">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input class="form-check-input avatar-option" type="radio" name="avatarRadio"
+                                    id="avatar9" value="/images/g4.png" data-avatar-number="9">
+                                <label class="form-check-label" for="avatar9">
+                                    <img src="/images/g4.png" style="width: 165%" alt="Avatar 5">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar4" value="/images/f3.png">
-                            <label class="form-check-label" for="avatar4">
-                                <img src="/images/f3.png" style="width: 165%" alt="Avatar 4">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar5" value="/images/f4.png">
-                            <label class="form-check-label" for="avatar5">
-                                <img src="/images/f4.png" style="width: 165%" alt="Avatar 5">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar6" value="/images/g1.png">
-                            <label class="form-check-label" for="avatar6">
-                                <img src="/images/g1.png" style="width: 165%" alt="Avatar 2">
-                            </label>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary" id="saveAvatar" data-bs-toggle="modal"
+                        data-bs-target="#avatarModal">Sauvegarder</button>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar7" value="/images/g2.png">
-                            <label class="form-check-label" for="avatar7">
-                                <img src="/images/g2.png" style="width: 165%" alt="Avatar 3">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar8" value="/images/g3.png">
-                            <label class="form-check-label" for="avatar8">
-                                <img src="/images/g3.png" style="width: 165%" alt="Avatar 4">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check">
-                            <input class="form-check-input avatar-option" type="radio" name="avatarRadio" id="avatar9" value="/images/g4.png">
-                            <label class="form-check-label" for="avatar9">
-                                <img src="/images/g4.png" style="width: 165%" alt="Avatar 5">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary" id="saveAvatar">Sauvegarder</button>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="scripts.js"></script>
+    <input type="hidden" id="selectedAvatar" name="selectedAvatar">
+    <input type="hidden" id="selectedAvatarNumber" name="selectedAvatarNumber">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const allImages = {
+                1: '/images/default.png',
+                2: '/images/f1.png',
+                3: '/images/f2.png',
+                4: '/images/f3.png',
+                5: '/images/f4.png',
+                6: '/images/g1.png',
+                7: '/images/g2.png',
+                8: '/images/g3.png',
+                9: '/images/g4.png',
+                // Add more entries as needed
+            };
+            const saveButton = document.getElementById('saveAvatar');
+            const selectedAvatarInput = document.getElementById('selectedAvatar');
+            const selectedAvatarNumberInput = document.getElementById('selectedAvatarNumber');
+            const avatarOptions = document.querySelectorAll('.avatar-option');
+            const currentAvatarImage = document.querySelector('#currentavatar');
+            const currentimage = <%- avatar.avatar %>;
+            currentAvatarImage.src = allImages[currentimage];
+            const statusButton = document.getElementById('statusButton');
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            const currentstatut = <%- statut.statut %>;  // Assuming statut is a variable in EJS
+
+            function updateAvatar(idavatar) {
+                fetch('/updateAvatar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ avatar: idavatar }),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Avatar updated:', data);
+
+                        // Assuming there is an 'image' property in the response containing the image URL
+                        const imageUrl = data.image;
+
+                        // Update the src attribute of the currentAvatarImage
+                        currentAvatarImage.src = imageUrl;
+
+                    })
+                    .catch(error => console.error('Error updating avatar:', error));
+            }
+
+            saveButton.addEventListener('click', function () {
+                const selectedAvatar = Array.from(avatarOptions).find(avatarOption => avatarOption.checked);
+
+                if (selectedAvatar) {
+                    const selectedAvatarValue = selectedAvatar.value;
+                    const selectedAvatarNumber = selectedAvatar.dataset.avatarNumber;
+
+                    selectedAvatarInput.value = selectedAvatarValue;
+                    selectedAvatarNumberInput.value = selectedAvatarNumber;
+
+                    console.log('Selected Avatar:', selectedAvatarValue);
+                    console.log('Selected Avatar Number:', selectedAvatarNumber);
+                    updateAvatar(selectedAvatarNumber);
+                    const avatarModal = new bootstrap.Modal(document.getElementById('avatarModal'));
+                    avatarModal.hide();
+                } else {
+                    console.log('No avatar selected');
+                }
+            });
+
+
+            function setInitialState() {
+                const selectedColor = getSelectedColor(currentstatut);
+                statusButton.style.backgroundColor = selectedColor;
+                statusButton.style.borderColor = selectedColor;
+            }
+
+            function getSelectedColor(statutValue) {
+                switch (statutValue) {
+                    case 1:
+                        return 'green';
+                    case 2:
+                        return 'red';
+                    case 3:
+                        return 'orange';
+                    case 4:
+                        return 'rgba(192, 192, 192, 0.2)'; // Hors ligne
+                    default:
+                        return 'green'; // Default color
+                }
+            }
+
+            function updateStatut(id) {
+                fetch('/updateStatut', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ statut: id }),
+                })
+                    .then(response => response.json())
+                    .then(data => console.log('Statut updated:', data))
+                    .catch(error => console.error('Error updating statut:', error));
+            }
+
+            dropdownItems.forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const id = parseInt(item.id);
+                    const color = getSelectedColor(id);
+                    console.log(id);
+                    statusButton.style.backgroundColor = color;
+                    statusButton.style.borderColor = color;
+
+                    // Update statut when the user changes it
+                    updateStatut(id);
+                });
+            });
+
+            // Set the initial state when the page loads
+            setInitialState();
+
+            // Add an event listener to handle page reload or closure
+
+        });
+    </script>
+
+
+
 </body>
-</html>
 
+</html>

@@ -48,6 +48,29 @@ app.get('/users', db.getUsers);
 app.post("/signIn/verification", (req, res) => {
 
 })
+app.post("/updateStatut", async (req, res) => {
+    if(req.body.statut !== null){
+    if(db.getUserStatut !== req.body.statut){
+        console.log("statut changed")
+        await db.updateUserStatut(req.session.userEmail,req.body.statut);
+        
+    }
+    else{
+        console.log("same statut")
+    }
+    }
+})
+app.post("/updateAvatar", (req, res) => {
+    if(req.body.avatar !== null){
+
+    if(db.getUserAvatar !== req.body.avatar){
+         db.updateUserAvatar(req.session.userEmail,req.body.avatar);
+    }
+    else{
+        console.log("same avatar")
+    }
+}
+})
     app.post("/signIn/register", (req, res) => {
     console.log(req.body);
     const email = req.body.email;
@@ -129,7 +152,9 @@ app.get('/profile', async (req, res) => {
         const userName = req.session.userName;
         const country = req.session.country;
         const date = await db.getUserDate(req.session.userEmail);
-        res.render('profile', { userName, country, date });
+        const statut = await db.getUserStatut(req.session.userEmail);
+        const avatar = await db.getUserAvatar(req.session.userEmail);
+        res.render('profile', { userName, country, date , statut, avatar });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -143,6 +168,16 @@ app.get('/settings', async (req, res) => {
         const userEmail = req.session.userEmail;
         const error = req.session.userError;
         res.render('settings', {userName, userEmail, country, error});
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
+
+app.get('/friends', async (req, res) => {
+    try {
+        const userName = req.session.userName;
+        res.render('friends', {userName});
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -173,7 +208,8 @@ app.post('/updateInfo',  async (req, res) => {
 app.post('/updatePass', async (req, res) => {
     const { oldPass, newPass } = req.body;
     const mdp = await db.getUserPass(req.session.userEmail);
-    if (oldPass === mdp.mot_de_passe_hashed) {
+    const isPasswordMatch = await verifyPassword(oldPass, mdp.mot_de_passe_hashed);
+    if (isPasswordMatch) {
         db.updateUserPass(req.session.userEmail, newPass);
         req.session.userError = false;
         res.redirect('/settings');
