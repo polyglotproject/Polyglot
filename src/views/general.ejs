@@ -5,10 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Ajouter le lien vers la bibliothèque Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    /* Ajoutez votre propre style ici */
     body {
       margin: 0;
       padding: 0;
@@ -29,6 +27,7 @@
       float: left;
       padding: 20px;
     }
+
 
     .send-messages {
       padding: 10px;
@@ -56,13 +55,12 @@
     }
 
     .message {
-      background-color: #e0e0e0;
       padding: 8px 12px;
       margin-bottom: 4px;
       margin-top: 20px;
-      margin-left: 20px;
+      margin-left: 10px;
       border-radius: .4em;
-      max-width: 50%;
+      max-width: 90%;
       word-wrap: break-word;
       text-align: left;
     }
@@ -90,10 +88,64 @@
     }
     .settings-icon:hover{
         color: #abd1f8;
-
     }
+
+    .activity {
+      margin-top: auto;
+    }
+
+    .post {
+      background-color: #eee;
+      border-radius: 10px;
+      padding: 0 0 .25rem;
+      margin: .5rem;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .post--left {
+      width: 60%;
+      align-self: flex-start;
+    }
+
+    .post--right {
+      width: 60%;
+      align-self: flex-end;
+    }
+
+    .post__header {
+      color: #fff;
+      padding: .25rem .5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .post__header--user {
+      background-color: blue;
+    }
+
+    .post__header--reply {
+      background-color: purple;
+    }
+
+    .post__header--name {
+      font-weight: bold;
+    }
+
+    .post__header--time {
+      font-size: .8rem;
+    }
+
+    .post__text {
+      margin-top: 5px;
+      color: #333;
+      padding: .25rem .5rem;
+    }
+
   </style>
-  <title>Chat avec Image</title>
+  <title>Chat</title>
 </head>
 
 <body>
@@ -103,17 +155,31 @@
       <div class="chat-container" id="chat">
         <div class="message-container" id="messageContainer">
           <!-- Nouveaux messages apparaîtront ici -->
+
           <div class="message">
-            <strong>Joe :</strong> dd
+
+
+          </div>
+
+
+        </div>
+        <div>
+
+          <p class="activity"></p>
+          <p class="user-list"></p>
+
+          <div class="send-messages" id="message">
+            <input type="text" id="textMessage" placeholder="Saisissez votre message">
+            <button class="btn btn-primary sendMessage">Envoyer</button>
+            <p class="user-list"></p>
           </div>
         </div>
-        <div class="send-messages">
-          <input type="text" placeholder="Saisissez votre message">
-          <button class="btn btn-primary" onclick="sendMessage()">Envoyer</button>
-        </div>
+
       </div>
+
       <div class="content-container">
-       
+
+
         
       </div>
     </div>
@@ -123,11 +189,11 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
   <script>
-    function sendMessage() {
+  /*  function sendMessage() {
       var chatContainer = document.getElementById('chat');
       var messageContainer = document.getElementById('messageContainer');
       var newMessageContainer = document.createElement('div');
@@ -137,6 +203,103 @@
       messageContainer.appendChild(newMessageContainer);
       document.querySelector('.send-messages input').value = ''; // Efface le champ de texte après l'envoi du message
     }
+*/
+    const socket = io('ws://localhost:4111');
+
+    const msgInput = document.querySelector('#textMessage')
+    const nameInput = '<%- JSON.stringify(userName) %>'.replaceAll('"','');
+    const chatRoom = localStorage.getItem('countryName');
+    const activity = document.querySelector('.activity')
+    const usersList = document.querySelector('.user-list')
+    const chatDisplay = document.querySelector('.message')
+
+    socket.emit('enterRoom',{name: nameInput, room: chatRoom})
+
+    document.title = `Chat - ${chatRoom}`;
+
+    console.log("ok1")
+
+    function sendMessage(e) {
+      console.log("ok2");
+      e.preventDefault()
+      console.log("ok3")
+      if (nameInput && msgInput.value && chatRoom) {
+        socket.emit('message', {
+          name: nameInput,
+          text: msgInput.value
+        })
+        msgInput.value = ""
+      }
+      msgInput.focus()
+    }
+
+    document.querySelector('.sendMessage')
+            .addEventListener('click', sendMessage)
+
+    console.log("ok finish")
+    msgInput.addEventListener('keypress', () => {
+      socket.emit('activity', nameInput)
+    })
+
+    // Listen for messages
+    socket.on("message", (data) => {
+      activity.textContent = ""
+      const { name, text, time } = data
+      const li = document.createElement('li')
+      li.className = 'post'
+
+      // Notre message
+      if (name === nameInput) li.className = 'post post--left'
+
+      // Autre message
+      if (name !== nameInput && name !== 'Admin') li.className = 'post post--right'
+      if (name !== 'Admin') {
+        li.innerHTML = `<div class="post__header ${name === nameInput
+                ? 'post__header--user'
+                : 'post__header--reply'
+        }">
+        <span class="post__header--name">${name}</span>
+        <span class="post__header--time">${time}</span>
+        </div>
+        <div class="post__text">${text}</div>`
+      } else {
+        li.innerHTML = `<div class="post__text">${text}</div>`
+      }
+      document.querySelector('.message').appendChild(li)
+
+      chatDisplay.scrollTop = chatDisplay.scrollHeight
+    })
+
+    let activityTimer
+    =socket.on("activity", (name) => {
+      activity.textContent = `${name} is typing...`
+
+      // Clear after 3 seconds
+      clearTimeout(activityTimer)
+      activityTimer = setTimeout(() => {
+        activity.textContent = ""
+      }, 3000)
+    })
+
+    socket.on('userList', ({ users }) => {
+      showUsers(users)
+    })
+
+
+    function showUsers(users) {
+      usersList.textContent = ''
+      console.log(chatRoom)
+      if (users) {
+        usersList.innerHTML = `<em>Users in ${chatRoom}:</em>`
+        users.forEach((user, i) => {
+          usersList.textContent += ` ${user.name}`
+          if (users.length > 1 && i !== users.length - 1) {
+            usersList.textContent += ","
+          }
+        })
+      }
+    }
+
   </script>
 
 </body>
