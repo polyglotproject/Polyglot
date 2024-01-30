@@ -2,16 +2,17 @@ const express = require('express');
 const session = require('express-session');
 const app = express();
 const bcrypt = require("bcryptjs");
+const strftime = require('strftime');
 const saltRounds = 12;
 
 async function verifyPassword(password, hashedPassword) {
     try {
-      const match = await bcrypt.compare(password, hashedPassword);
-      return match;
+        const match = await bcrypt.compare(password, hashedPassword);
+        return match;
     } catch (error) {
-      throw error;
+        throw error;
     }
-  }
+}
 app.use(express.urlencoded({ extended: 'false' }))
 app.use(express.json())
 app.use(session({
@@ -28,7 +29,7 @@ app.set('views', "./src/views");
 const PORT = process.env.PORT || 4111;
 
 // Socket.io configuration
-const {Server} = require('socket.io')
+const { Server } = require('socket.io')
 const http = require('http');
 const server = http.createServer(app);
 const expressServer = server.listen(PORT, console.log("Server has started at port " + PORT));
@@ -49,29 +50,29 @@ app.post("/signIn/verification", (req, res) => {
 
 })
 app.post("/updateStatut", async (req, res) => {
-    if(req.body.statut !== null){
-    if(db.getUserStatut !== req.body.statut){
-        console.log("statut changed")
-        await db.updateUserStatut(req.session.userEmail,req.body.statut);
-        
-    }
-    else{
-        console.log("same statut")
-    }
+    if (req.body.statut !== null) {
+        if (db.getUserStatut !== req.body.statut) {
+            console.log("statut changed")
+            await db.updateUserStatut(req.session.userEmail, req.body.statut);
+
+        }
+        else {
+            console.log("same statut")
+        }
     }
 })
 app.post("/updateAvatar", (req, res) => {
-    if(req.body.avatar !== null){
+    if (req.body.avatar !== null) {
 
-    if(db.getUserAvatar !== req.body.avatar){
-         db.updateUserAvatar(req.session.userEmail,req.body.avatar);
+        if (db.getUserAvatar !== req.body.avatar) {
+            db.updateUserAvatar(req.session.userEmail, req.body.avatar);
+        }
+        else {
+            console.log("same avatar")
+        }
     }
-    else{
-        console.log("same avatar")
-    }
-}
 })
-    app.post("/signIn/register", (req, res) => {
+app.post("/signIn/register", (req, res) => {
     console.log(req.body);
     const email = req.body.email;
     db.UserExist(email)
@@ -81,16 +82,19 @@ app.post("/updateAvatar", (req, res) => {
             } else {
                 db.AddUser(req, res);
                 req.session.userName = req.body.user;
+                userName = req.session.userName;
+                isAdmin = false;
                 req.session.userEmail = req.body.email;
                 req.session.country = req.body.flag;
                 req.session.date = req.body.date_inscription;
                 req.session.userError = false;
-                res.redirect('/account')            }
+                res.render('account', { userName, isAdmin });
+            }
         })
         .catch((error) => {
             console.error('Error checking user existence:', error);
         });
-  
+
 
 
 });
@@ -98,41 +102,95 @@ app.post("/updateAvatar", (req, res) => {
 app.post("/signUp/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-      
+
         const [mdp, mail] = await Promise.all([
-          db.getUserPass(email),
-          db.getUserEmail(email)
+            db.getUserPass(email),
+            db.getUserEmail(email)
         ]);
-      
+
         if (mdp && mail) {
-          const isPasswordMatch = await verifyPassword(password, mdp.mot_de_passe_hashed);
-      
-          if (isPasswordMatch && email === mail.email) {
-            const userName = await db.getUser(email);
-            const country = await db.getUserCountry(email);
-            const date = await db.getUserDate(email);
-      
-            req.session.userName = userName.nom_utilisateur;
-            req.session.userEmail = email;
-            req.session.userError = false;
-            req.session.date_inscription = date.date_inscription;
-            req.session.country = country.pays_preferee;
-      
-            res.redirect('/account');
-          } else {
-            res.redirect('/signUp?credentialsError=true' );
-        }
+            const isPasswordMatch = await verifyPassword(password, mdp.mot_de_passe_hashed);
+        
+            if (isPasswordMatch && email === mail.email) {
+                const userIsAdmin = await db.isAdmin(email);
+                console.log(userIsAdmin);
+                if (userIsAdmin.isadmin === false) {
+                    const userName = await db.getUser(email);
+                    const country = await db.getUserCountry(email);
+                    const date = await db.getUserDate(email);
+
+                    req.session.userName = userName.nom_utilisateur;
+                    req.session.userEmail = email;
+                    req.session.userError = false;
+                    req.session.date_inscription = date.date_inscription;
+                    req.session.country = country.pays_preferee;
+
+                    res.redirect('/account');
+                }    else {
+                    res.redirect('/signUp?Adminuser=true');
+                }
+        
+            } else {
+                res.redirect('/signUp?credentialsError=true');
+            }
         } else {
-            res.redirect('/signUp?credentialsError=true' );
+            res.redirect('/signUp?credentialsError=true');
         }
-      } catch (error) {
+    }
+    catch (error) {
         // Handle errors
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
-      }
-      
+    }
+
 });
 
+app.post("/adminsignUp/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const [mdp, mail] = await Promise.all([
+            db.getUserPass(email),
+            db.getUserEmail(email)
+        ]);
+
+        if (mdp && mail) {
+            const isPasswordMatch = await verifyPassword(password, mdp.mot_de_passe_hashed);
+        
+            if (isPasswordMatch && email === mail.email) {
+                const userIsAdmin = await db.isAdmin(email);
+                console.log(userIsAdmin);
+
+                if (userIsAdmin.isadmin === true) {
+                    const userName = await db.getUser(email);
+                    const country = await db.getUserCountry(email);
+                    const date = await db.getUserDate(email);
+
+                    req.session.userName = userName.nom_utilisateur;
+                    req.session.userEmail = email;
+                    req.session.userError = false;
+                    req.session.date_inscription = date.date_inscription;
+                    req.session.country = country.pays_preferee;
+
+                    res.redirect('/account');
+                }    else {
+                    res.redirect('/adminsignUp?Adminuser=true');
+                }
+        
+            } else {
+                res.redirect('/adminsignUp?credentialsError=true');
+            }
+        } else {
+            res.redirect('/adminsignUp?credentialsError=true');
+        }
+    }
+    catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+
+});
 app.get('/', (req, res) => {
     res.redirect('/home');
 });
@@ -140,12 +198,55 @@ app.get('/', (req, res) => {
 app.get('/account', async (req, res) => {
     try {
         const userName = req.session.userName;
-        res.render('account', { userName });
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+        res.render('account', { userName, isAdmin });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
 });
+
+app.get('/gestion', async (req, res) => {
+    try {
+        const userName = req.session.userName;
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+        const userdata = await db.getUsers();
+        const currentPage = req.query.page || 1;
+        console.log(currentPage);
+        
+        if(isAdmin.isadmin){
+            res.render('gestion', { userName, isAdmin, userdata, currentPage });
+        }
+        else{
+            res.redirect('/home');
+
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
+app.post('/search', async (req, res) => {
+    try {
+        const userName = req.session.userName;
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+        const userdata = await db.getAllUser(req.body.username);
+        const currentPage = req.query.page || 1;
+        console.log("The username : " + userdata);
+
+        if(isAdmin.isadmin){
+            res.render('gestion', { userName, isAdmin, userdata,currentPage });
+        }
+        else{
+            res.redirect('/home');
+
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Erreur lors de la récupération des données utilisateur.');
+    }
+});
+
 
 app.get('/profile', async (req, res) => {
     try {
@@ -154,7 +255,9 @@ app.get('/profile', async (req, res) => {
         const date = await db.getUserDate(req.session.userEmail);
         const statut = await db.getUserStatut(req.session.userEmail);
         const avatar = await db.getUserAvatar(req.session.userEmail);
-        res.render('profile', { userName, country, date , statut, avatar });
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+
+        res.render('profile', { userName, country, date, statut, avatar, isAdmin });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -167,7 +270,9 @@ app.get('/settings', async (req, res) => {
         const country = req.session.country;
         const userEmail = req.session.userEmail;
         const error = req.session.userError;
-        res.render('settings', {userName, userEmail, country, error});
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+
+        res.render('settings', { userName, userEmail, country, error, isAdmin });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -177,7 +282,9 @@ app.get('/settings', async (req, res) => {
 app.get('/friends', async (req, res) => {
     try {
         const userName = req.session.userName;
-        res.render('friends', {userName});
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+
+        res.render('friends', { userName, isAdmin });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
@@ -195,7 +302,7 @@ app.get('/logout', (req, res) => {
     });
 });
 
-app.post('/updateInfo',  async (req, res) => {
+app.post('/updateInfo', async (req, res) => {
     const { user, country } = req.body;
     db.updateUserInfo(req.session.userEmail, user, country);
     const userName = await db.getUser(req.session.userEmail);
@@ -224,7 +331,7 @@ app.get('/general', async (req, res) => {
         const userName = req.session.userName;
         const country = req.session.country;
         const userEmail = req.session.userEmail;
-        res.render('general', {userName, userEmail, country});
+        res.render('general', { userName, userEmail, country });
     } catch (error) {
         console.error(error);
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');

@@ -17,11 +17,15 @@ const aboutView = (req, res) =>{
 const FAQView = (req, res) =>{
     res.render("FAQ", {});
 }
+const adminSignUp = (req,res) => {
+    res.render("adminsignUp", {});
+}
 
 module.exports =  {
     homeView,
     signUpView,
     signInView,
     aboutView,
-    FAQView
+    FAQView,
+    adminSignUp
 };

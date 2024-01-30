@@ -1,210 +1,222 @@
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
-    
-    .flex {
-      display: flex;
-      align-items: center;
-    }
-    
-    .containeur {
-      padding: 0 15px;
-      min-height: 100vh;
-      justify-content: center;
-      background: #f0f2f5;
-    }
-    
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+  }
+
+  .containeur {
+    padding: 0 15px;
+    min-height: 100vh;
+    justify-content: center;
+    background: #f0f2f5;
+  }
+
+  .facebook-page {
+    justify-content: space-between;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .facebook-page .text {
+    margin-bottom: 90px;
+  }
+
+  .facebook-page h1 {
+    color: #00ADFE;
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  .facebook-page p {
+    font-size: 1.75rem;
+    white-space: nowrap;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  form input {
+    height: 55px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    padding: 0 14px;
+  }
+
+  form input:focus {
+    outline: none;
+    border-color: #00ADFE;
+  }
+
+  img {
+    position: relative;
+    right: 15px;
+    margin-right: 5px;
+  }
+
+  ::placeholder {
+    color: #777;
+    font-size: 1.063rem;
+  }
+
+  .link {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .link .login {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #00ADFE;
+    padding: 15px 0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+
+  .link .login:hover {
+    background: #00ADFE;
+  }
+
+  form a {
+    text-decoration: none;
+  }
+
+  .link .forgot {
+    color: #1877f2;
+    font-size: 0.875rem;
+
+  }
+
+  .link .forgot:hover {
+    color: #155ebd;
+    text-decoration: none;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+
+  .button {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .button a {
+    padding: 15px 25px;
+    background: #0057a2;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1.063rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+  }
+
+  .button a:hover {
+    background: #1d64a2;
+  }
+
+  @media (max-width: 900px) {
     .facebook-page {
-      justify-content: space-between;
-      max-width: 1000px;
-      width: 100%;
+      flex-direction: column;
+      text-align: center;
     }
-    
+
     .facebook-page .text {
-      margin-bottom: 90px;
+      margin-bottom: 30px;
     }
-    
+  }
+
+  @media (max-width: 460px) {
     .facebook-page h1 {
-      color: #00ADFE;
-      font-size: 4rem;
-      margin-bottom: 10px;
+      font-size: 3.5rem;
     }
-    
+
     .facebook-page p {
-      font-size: 1.75rem;
-      white-space: nowrap;
+      font-size: 1.3rem;
     }
-    
+
     form {
-      display: flex;
-      flex-direction: column;
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-        0 8px 16px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
+      padding: 15px;
     }
-    
-    form input {
-      height: 55px;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 1rem;
-      padding: 0 14px;
-    }
-    
-    form input:focus {
-      outline: none;
-      border-color: #00ADFE;
-    }
-    img{
-        position: relative;
-        right:15px;
-        margin-right: 5px;
-    }
-    
-    ::placeholder {
-      color: #777;
-      font-size: 1.063rem;
-    }
-    
-    .link {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      gap: 15px;
-    }
-    
-    .link .login {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      background: #00ADFE;
-      padding: 15px 0;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 1.25rem;
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
-    
-    .link .login:hover {
-      background: #00ADFE;
-    }
-    
-    form a {
-      text-decoration: none;
-    }
-    
-    .link .forgot {
-      color: #1877f2;
-      font-size: 0.875rem;
-    
-    }
-    
-    .link .forgot:hover {
-      color: #155ebd;
-      text-decoration: none;
-    }
-    
-    hr {
-      border: none;
-      height: 1px;
-      background-color: #ccc;
-      margin-bottom: 20px;
-      margin-top: 20px;
-    }
-    
-    .button {
-      margin-top: 25px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    
-    .button a {
-      padding: 15px 25px;
-      background: #0057a2;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 1.063rem;
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
-    
-    .button a:hover {
-      background: #1d64a2;
-    }
-    
-    @media (max-width: 900px) {
-      .facebook-page {
-        flex-direction: column;
-        text-align: center;
-      }
-    
-      .facebook-page .text {
-        margin-bottom: 30px;
-      }
-    }
-    
-    @media (max-width: 460px) {
-      .facebook-page h1 {
-        font-size: 3.5rem;
-      }
-    
-      .facebook-page p {
-        font-size: 1.3rem;
-      }
-    
-      form {
-        padding: 15px;
-      }
-    }
-    .main{
-        font-family: 'Roboto', sans-serif;  
-        margin-bottom: 0;
-    }
-    </style>
-    
+  }
 
-    
-        <div class="containeur flex">
-          <div class="facebook-page flex">
-            <div class="text">
-                <img src="images/logo.png" width="225">
-              <p class="main">Avec Polyglot, partagez et apprenez de</p>
-              <p class="main">nouvelle culture.</p>
-            </div>
-            <form action="/signUp/login" method="post">
-              <input type="text" name="email" placeholder="Email" required>
-              <input type="password" name="password" placeholder="Mot de passe" required>
-              <div class="link">
-                <button type="submit" class="login">Se connecter</button>
-                <a href="/forgor" class="forgot">Mot de passe oublié ?</a>
-              </div>
-              <hr>
-              <div class="button">
-                <a href="/signIn">Créer un compte</a>
-              </div>
-            </form>
-          </div>
-        </div>
+  .main {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+  }
+</style>
 
-        <script>
-          const urlParams = new URLSearchParams(window.location.search);
-const userExistParam = urlParams.get('credentialsError');
 
-if (userExistParam && userExistParam.toLowerCase() === 'true') {
+
+<div class="containeur flex">
+  <div class="facebook-page flex">
+    <div class="text">
+      <img src="images/logo.png" width="225">
+      <p class="main">Avec Polyglot, partagez et apprenez de</p>
+      <p class="main">nouvelle culture.</p>
+    </div>
+    <form action="/signUp/login" method="post">
+      <input type="text" name="email" placeholder="Email" required>
+      <input type="password" name="password" placeholder="Mot de passe" required>
+      <div class="link">
+        <button type="submit" class="login">Se connecter</button>
+        <a href="/forgor" class="forgot">Mot de passe oublié ?</a>
+      </div>
+      <hr>
+      <div class="button">
+        <a href="/signIn">Créer un compte</a>
+      </div>
+      <center style="margin: 7px; font-size: 14px;   font-family: 
+           'Poppins', sans-serif; font-weight: 200;
+           ">
+        Vous êtes administateur ?
+        <a href="/adminsignUp">Connectez-vous ici !</a>
+
+      </center>
+    </form>
+  </div>
+</div>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Honk&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sixtyfour&display=swap');
+</style>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const userExistParam = urlParams.get('credentialsError');
+  const adminParam = urlParams.get('Adminuser');
+
+  if (userExistParam && userExistParam.toLowerCase() === 'true') {
 
     // Create a <p> element
     const paragraphElement = document.createElement('p');
@@ -220,14 +232,39 @@ if (userExistParam && userExistParam.toLowerCase() === 'true') {
     const linkDiv = document.querySelector('.link');
 
     if (linkDiv) {
-        // Insert the <p> element before the "S'inscrire" button
-        linkDiv.insertBefore(paragraphElement, linkDiv.firstChild);
-        console.log("Paragraph added successfully.");
+      // Insert the <p> element before the "S'inscrire" button
+      linkDiv.insertBefore(paragraphElement, linkDiv.firstChild);
+      console.log("Paragraph added successfully.");
     } else {
-        console.error("Div with class 'link' not found.");
+      console.error("Div with class 'link' not found.");
     }
-} else {
+  } else {
     console.log("Not adding the paragraph.");
-}
-        </script>
-        <%- include('footer.ejs'); %>
+  }
+  if (adminParam && adminParam.toLowerCase() === 'true') {
+
+    // Create a <p> element
+    const paragraphElement = document.createElement('p');
+
+    // Set the text content of the <p> element
+    paragraphElement.textContent = 'Veuillez vous connecter sur la page de connexion administateur !';
+
+    // Apply styles to the <p> element
+    paragraphElement.style.fontSize = '0.75rem';
+    paragraphElement.style.color = 'red';
+
+    // Get the reference to the div with class "link"
+    const linkDiv = document.querySelector('.link');
+
+    if (linkDiv) {
+      // Insert the <p> element before the "S'inscrire" button
+      linkDiv.insertBefore(paragraphElement, linkDiv.firstChild);
+      console.log("Paragraph added successfully.");
+    } else {
+      console.error("Div with class 'link' not found.");
+    }
+  } else {
+    console.log("Not adding the paragraph.");
+  }
+</script>
+<%- include('footer.ejs'); %>

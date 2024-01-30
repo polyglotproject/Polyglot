@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'polyglot',
-  password: 'butinfo', //lol j'ai ton mdp #hacker
+  password: 'sofiane', //lol j'ai ton mdp #hacker
   port: 5432,
 })
 async function hashPassword(password) {
@@ -39,22 +39,44 @@ const UserExist = (email) => {
     );
   });
 };
-const getUsers = (request, response) => {
-    pool.query('SELECT * FROM Utilisateurs ORDER BY id_utilisateur ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
+const getUsers = () => {
+  return new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM Utilisateurs ORDER BY id_utilisateur ASC', (error, results) => {
+          if (error) {
+              reject(error);
+          }
+
+          // Initialize an empty object
+          const usersObject = {};
+
+          // Use forEach to iterate through the array
+          results.rows.forEach((user) => {
+              usersObject[user.id_utilisateur] = {
+                  date: user.date_inscription,
+                  username: user.nom_utilisateur,
+                  email: user.email,
+                  statut: user.statut,
+                  pays: user.pays_preferee,
+                  // Add other properties as needed
+              };
+          });
+
+          console.log("TEST");
+
+          resolve(usersObject);
+      });
+  });
+};
+
   const AddUser = async (request, response, callback) => {
     const { user, email, password, flag , date_inscription } = request.body;
     const hash_pass = await hashPassword(request.body.password);
     const statut = 1 ;
     const avatar = 1 ;
+    const isAdmin = false ;
     pool.query(
-      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee, statut, avatar) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-      [user, email, hash_pass, date_inscription, flag, statut, avatar],
+      'INSERT INTO Utilisateurs (nom_utilisateur, email, mot_de_passe_hashed, date_inscription, pays_preferee, statut, avatar, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+      [user, email, hash_pass, date_inscription, flag, statut, avatar, isAdmin],
       (error, results) => {
         if (error) {
           console.error(error);
@@ -68,12 +90,58 @@ const getUsers = (request, response) => {
   };
 
 const getUser = (userEmail) => {
-    return pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1', [userEmail])
+    return pool.query('SELECT nom_utilisateur FROM Utilisateurs WHERE email = $1 ', [userEmail])
         .then((results) => results.rows[0])
         .catch((error) => {
             throw error;
         });
 };
+
+
+const getAllUser = (name) => {
+  return new Promise((resolve, reject) => {
+    console.log("The IN username"+name);
+      pool.query(
+          ' SELECT * FROM Utilisateurs WHERE nom_utilisateur ILIKE $1 ORDER BY id_utilisateur ASC ',
+          [`${name}%`],
+          (error, results) => {
+              if (error) {
+                  reject(error);
+              }
+
+              // Initialize an empty object
+              const usersObject = {};
+
+              // Use forEach to iterate through the array
+              results.rows.forEach((user) => {
+                  usersObject[user.id_utilisateur] = {
+                      date: user.date_inscription,
+                      username: user.nom_utilisateur,
+                      email: user.email,
+                      statut: user.statut,
+                      pays: user.pays_preferee,
+                      // Add other properties as needed
+                  };
+              });
+
+              console.log("TEST");
+              console.log(usersObject);
+
+              resolve(usersObject);
+          }
+      );
+  });
+};
+
+
+const isAdmin = (userEmail) => {
+  return pool.query('SELECT isadmin FROM Utilisateurs WHERE email = $1', [userEmail])
+      .then((results) => results.rows[0])
+      .catch((error) => {
+          throw error;
+      });
+};
+
 
 const getUserStatut = (userEmail) => {
 
@@ -244,5 +312,7 @@ module.exports = {
     getUserStatut,
     updateUserStatut,
     updateUserAvatar,
-    getUserAvatar
+    getUserAvatar,
+    isAdmin,
+    getAllUser
 }

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Polyglot</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"
+        id="bootstrap-css">
+    <style>
+        .nav-pills .nav-item .nav-link.active {
+            background-color: #044980;
+        }
+
+        .modif {
+            background-color: #044980;
+            border: #044980;
+        }
+
+        .card {
+            padding: 1.5em .5em .5em;
+            border-radius: 2em;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+
+        .btn-narrow {
+            width: 60%;
+        }
+    </style>
+</head>
+
+<body class="d-flex">
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh;">
+        <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <img src="images/logo.png" height="50px">
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/account" class="nav-link text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house" viewBox="0 0 16 16">
+                        <path
+                            d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z" />
+                    </svg>
+                    Accueil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/settings" class="nav-link text-black" aria-current="page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-gear" viewBox="0 0 16 16">
+                        <path
+                            d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                        <path
+                            d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                    </svg>
+                    Paramètres
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/profile" class="nav-link text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd"
+                            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                    Profil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/friends" class="nav-link text-black">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-people" viewBox="0 0 16 16">
+                        <path
+                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
+                    </svg>
+                    Amis
+                </a>
+            </li>
+            <% if (isAdmin.isadmin) { %>
+                <li class="nav-item">
+                    <a href="/gestion" class="nav-link active text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-people" viewBox="0 0 20 20">
+                            <path
+                                d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z" />
+                        </svg>
+                        Gestion
+                    </a>
+                </li>
+                <% } %>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <% if (isAdmin.isadmin) { %>
+                    <strong style="font-size: 10px; margin-right: 2Px; margin-top: -3px;  background: -webkit-radial-gradient(ellipse farthest-side at left center, #b43b3b 15%, #f78787 93%);
+                    background: -moz-radial-gradient(ellipse farthest-side at left center, #550202 15%, #ff0000 93%);
+                    background: radial-gradient(ellipse farthest-side at left center, #5f0505 15%, #ff0000 93%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;">admin</strong>
+                    <strong style="background: #110b00;
+                        background: -webkit-radial-gradient(ellipse farthest-side at left center, #030303 15%, #757575 93%);
+                        background: -moz-radial-gradient(ellipse farthest-side at left center, #1e1e1e 15%, #767676 93%);
+                        background: radial-gradient(ellipse farthest-side at left center, #1e1e1e 15%, #545252 93%);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;">
+                        <%= userName %>
+                    </strong>
+                    <% } else { %>
+                        <strong>
+                            <%= userName %>
+                        </strong>
+                        <% } %>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+                <li><a class="dropdown-item" href="/logout">Déconnexion</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.12.0/css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/1627044/default.css">
+    <link rel="stylesheet" type="text/css" href="https://dl.dropboxusercontent.com/u/1627044/default.date.css">
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.12.0/javascript/semantic.min.js"></script>
+    <script src="https://dl.dropboxusercontent.com/u/1627044/picker.js"></script>
+    <script src="https://dl.dropboxusercontent.com/u/1627044/picker.date.js"></script>
+    <script src="https://dl.dropboxusercontent.com/u/1627044/tablesort.js"></script>
+    <style>
+        form {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+
+        #searchInput {
+            padding: 5px;
+            /* Adjust as needed */
+        }
+
+        input[type="submit"] {
+            color: #ffffff;
+            padding: 4px;
+            margin-left: 10px;
+            background-color: #48c2ff;
+            border-radius: 8px;
+            border-style: none;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            height: 40px;
+            line-height: 20px;
+            list-style: none;
+            outline: none;
+            padding: 10px 16px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            transition: color 100ms;
+            vertical-align: baseline;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            transition: all .6s;
+        }
+
+
+
+        input[type="submit"]:hover {
+            border-radius: 12px;
+            background-color: #82cdf0;
+        }
+
+        .ui.segment {
+            margin-left: auto;
+            margin-right: auto;
+            background-color: whitesmoke;
+            padding: 15px;
+            max-width: 1200px;
+        }
+    </style>
+        <script>
+            function openEditModal() {
+                // Show the modal
+                $('#editModal').modal('show');
+            }
+    
+            function saveQuery() {
+                // Add logic to save the edited query here
+                // For example, you can retrieve the edited query using $('#query').val()
+                // and perform further actions
+                // After saving, you can close the modal
+                $('#editModal').modal('hide');
+            }
+            function closeQuery() {
+                // Add logic to save the edited query here
+                // For example, you can retrieve the edited query using $('#query').val()
+                // and perform further actions
+                // After saving, you can close the modal
+                $('#editModal').modal('hide');
+            }
+        </script>
+   <div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Add your form or input elements for editing queries here -->
+                <label for="query">Nom:</label>
+                <input type="text" id="query" class="form-control">
+                <label for="query">Pays:</label>
+                <input type="text" id="query" class="form-control">
+                <label for="query">Avertissement administrateur:</label>
+                <input type="text" id="query" class="form-control">
+
+            </div>
+          
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="saveQuery()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeQuery()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="ui segment">
+
+
+        <div class="center-input">
+            <form action="/search" method="post">
+                <input type="text" name="username" id="searchInput" placeholder="Rechercher un utilisateur..."
+                    class="form-control">
+                <input type="submit" value="Rechercher">
+            </form>
+        </div>
+
+
+        <table class="ui sortable padded table segment">
+            <thead>
+                <tr>
+                    <th>Date d'inscription</th>
+                    <th>Nom d'Utilisateur</th>
+                    <th>Email</th>
+                    <th>Statut</th>
+                    <th>Pays</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% let currentpage=parseInt(currentPage) || 1; %>
+                    <% let usersPerPage=15; %>
+                        <% let startIndex=(currentpage - 1) * usersPerPage; %>
+                            <% let endIndex=currentpage * usersPerPage; %>
+
+                                <% Object.keys(userdata).slice(startIndex, endIndex).forEach(userId=> { %>
+                                    <tr>
+                                        <% Object.keys(userdata[userId]).forEach(key=> { %>
+                                            <td>
+                                                <% if (key==='statut' ) { %>
+                                                    <% if (userdata[userId][key]===1) { %>
+                                                        En ligne
+                                                        <% } else if (userdata[userId][key]===2) { %>
+                                                            Ne pas déranger
+                                                            <% } else if (userdata[userId][key]===3) { %>
+                                                                Inactif
+                                                                <% } else if (userdata[userId][key]===4) { %>
+                                                                    Hors Ligne
+                                                                    <% } else { %>
+                                                                        <%= userdata[userId][key] %>
+                                                                            <% } %>
+                                                                                <% } else if (key==='date' ) { %>
+                                                                                    <%= new
+                                                                                        Date(userdata[userId][key]).toLocaleDateString('en-US')
+                                                                                        %>
+                                                                                        <% } else { %>
+                                                                                            <%= userdata[userId][key] %>
+                                                                                                <% } %>
+                                            </td>
+                                            <% }); %>
+
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-three-dots dropdown-toggle"
+                                                            data-bs-toggle="dropdown" aria-expanded="false"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                                        </svg>
+
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="#" onclick="openEditModal()">Edit</a></li>
+                                                            <li><a class="dropdown-item" href="#"
+                                                                    style="color: #ff0000;">Ban</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                    </tr>
+                                    <% }); %>
+
+
+
+            </tbody>
+
+        </table>
+        <div id="pag-cover">
+            <div id="pg-links">
+                <div class="td arr-cover">
+                    <div class="arrow" id="l-arrow"><i class="gg-arrow-left-r"></i></div>
+                </div>
+                <div class="td">
+                    <div id="links">
+                        <% const totalPages=Math.ceil(Object.keys(userdata).length / 15); %>
+                            <% const currentpa=1; %>
+                                <% const startPage=Math.max(1, currentpa - 1); %>
+                                    <% const endPage=Math.min(totalPages, startPage + 2); %>
+                                        <% for (let page=startPage; page <=endPage; page++) { %>
+                                            <div class="pg-link" onclick="goToPage(this)"><span>
+                                                    <%= page %>
+                                                </span></div>
+                                            <% } %>
+                    </div>
+                </div>
+                <div class="td arr-cover">
+                    <div class="arrow" id="r-arrow" style="color: white;"><i class="gg-arrow-right-r"></i></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        function goToPage(element) {
+            // Extract the value of the span inside the clicked element
+            const page = parseInt(element.querySelector('span').innerText);
+            console.log('Navigating to page', page);
+
+            // Add logic to update the URL with the selected page
+            const url = new URL(window.location.href);
+            url.searchParams.set('page', page);
+            window.location.href = url.href;
+        }
+    </script>
+    <script>
+        $(function () {
+            var pg_links = $(".pg-link"),
+                h_elm = $("#m-pg-link"),
+                curr = 1,
+                _this,
+                _class,
+                _id,
+                __this,
+                _num,
+                i = 0;
+
+            function changeNumbers(flag) {
+                if ((curr > 2 && flag == 0) || flag) {
+                    if (curr == 1) {
+                        curr = 2;
+                        h_elm.removeClass("left");
+                        return;
+                    }
+
+                    $(pg_links).each(function () {
+                        __this = $(this).find("span");
+                        _num = parseInt(__this.text());
+
+                        if (flag) _num += 1;
+                        else _num -= 1;
+
+                        ++i;
+
+                        pg_links.addClass("s-hide");
+
+                        __this.text(_num);
+
+                        setTimeout(function () {
+                            pg_links.removeClass("s-hide");
+                        }, 150);
+
+                        if (i == 2) curr = _num;
+                    });
+
+                    i = 0;
+                } else {
+                    if (curr == 2 && flag == 0) {
+                        curr = 1;
+                        h_elm.addClass("left");
+                    }
+                }
+            }
+
+            function changeLinks() {
+                _this = $(this);
+                _class = _this.attr("class").trim().toLowerCase();
+
+                if (_class == "arrow") {
+                    _id = _this.attr("id").trim().toLowerCase();
+
+                    if (_id == "l-arrow") changeNumbers(0);
+                    else changeNumbers(1);
+                } else {
+                    if (parseInt(_this.text().trim()) < curr) changeNumbers(0);
+                    else changeNumbers(1);
+                }
+            }
+
+            $(".pg-link,.arrow").on("click", changeLinks);
+        });
+
+    </script>
+
+
+
+    <style>
+        #pag-cover {
+
+            right: 0;
+            left: 0;
+            width: 466px;
+            color: #fff;
+            line-height: 1;
+            margin: auto;
+            background-color: #2c63ff;
+            border-radius: 4px;
+            box-shadow: 0 10px 20px #26418f;
+            user-select: none;
+        }
+
+        .arr-cover {
+            width: 1px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .arrow {
+            padding: 26px;
+        }
+
+        .arrow i {
+            display: block;
+        }
+
+        #pg-links {
+            display: table;
+            width: 100%;
+        }
+
+        #pg-links .td {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #links {
+            width: 216px;
+            text-align: center;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .pg-link {
+            position: relative;
+            float: left;
+            color: #fff;
+            font-size: 20px;
+            text-align: center;
+            padding: 26px 25px;
+            background-color: transparent;
+            transition: 0.2s ease background-color, 0.3s ease color;
+        }
+
+        .pg-link span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .pg-link:hover {
+            background-color: #2d59d6;
+        }
+
+        .pg-link.s-hide {
+            color: rgba(255, 255, 255, 0);
+        }
+
+        #m-pg-link:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #1944bd;
+            transition: 0.3s ease right, 0.3s ease left;
+            z-index: 1;
+        }
+
+        #m-pg-link.left:after {
+            right: 62px;
+            left: -72px;
+        }
+    </style>
+
+
+
+
+    <style>
+        .gg-arrow-left-r {
+            box-sizing: border-box;
+            position: relative;
+            display: block;
+            width: 22px;
+            height: 22px;
+            border: 2px solid;
+            transform: scale(var(--ggs, 1));
+            border-radius: 4px
+        }
+
+        .gg-arrow-left-r::after,
+        .gg-arrow-left-r::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            left: 4px
+        }
+
+        .gg-arrow-left-r::after {
+            width: 6px;
+            height: 6px;
+            border-bottom: 2px solid;
+            border-left: 2px solid;
+            transform: rotate(45deg);
+            bottom: 6px
+        }
+
+        .gg-arrow-left-r::before {
+            width: 10px;
+            height: 2px;
+            bottom: 8px;
+            background: currentColor
+        }
+
+        .gg-arrow-right-r {
+            box-sizing: border-box;
+            position: relative;
+            display: block;
+            width: 22px;
+            height: 22px;
+            border: 2px solid;
+            transform: scale(var(--ggs, 1));
+            border-radius: 4px
+        }
+
+        .gg-arrow-right-r::after,
+        .gg-arrow-right-r::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            right: 4px
+        }
+
+        .gg-arrow-right-r::after {
+            width: 6px;
+            height: 6px;
+            border-top: 2px solid;
+            border-right: 2px solid;
+            transform: rotate(45deg);
+            bottom: 6px
+        }
+
+        .gg-arrow-right-r::before {
+            width: 10px;
+            height: 2px;
+            bottom: 8px;
+            background: currentColor
+        }
+
+        .ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+            width: calc(7 * 20px + 38px);
+
+            #li {
+                width: 10px;
+                height: 10px;
+                margin-left: 2px;
+                border-radius: 5px;
+                background: grey;
+                transition: width .3s ease-in-out;
+                cursor: pointer;
+
+                button {
+                    display: inline-block;
+                    visibility: hidden;
+                }
+
+                &:hover {
+                    background: orange;
+                    width: 15px;
+                }
+
+                &.active {
+                    background: red;
+                    width: 38px;
+                }
+            }
+        }
+
+
+
+        .pagination_component {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+
+            p {
+                font-weight: 600;
+                font-size: 1.2rem;
+                color: #444;
+            }
+        }
+
+        .ui.input {
+            margin: 0.5em;
+        }
+
+        .align-right {
+            float: right;
+        }
+
+        .center-input {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        #searchInput {
+            padding-right: 20px;
+            padding-right: 200px;
+
+            /* Adjust as needed */
+        }
+    </style>
+
+    <script>
+        let allPaginateBtns = document.querySelectorAll('.pagination li');
+
+        allPaginateBtns.forEach((el) => {
+            el.addEventListener('click', (e) => {
+                clearPaginatedActive();
+                el.classList.add('active');
+            })
+        })
+
+        function clearPaginatedActive() {
+            allPaginateBtns.forEach((el) => {
+                el.classList.remove('active');
+            })
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="scripts.js"></script>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const list = document.getElementById('list');
+        const items = list.getElementsByTagName('li');
+
+        searchInput.addEventListener('input', function () {
+            const searchValue = searchInput.value.toLowerCase();
+
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                const itemName = item.textContent.toLowerCase();
+
+                if (itemName.includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
