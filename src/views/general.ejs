@@ -42,7 +42,7 @@
     .send-messages input {
       flex: 1;
       margin-right: 10px;
-      border-radius: .4em ;
+      border-radius: .4em;
       border-color: #abd1f8;
     }
 
@@ -80,14 +80,15 @@
       bottom: 10px;
       right: 10px;
       color: #ffffff;
-      background-color:  #007bff;
+      background-color: #007bff;
       padding: 10px 10px;
       border-radius: .65em;
       cursor: pointer;
       transition: all .2s;
     }
-    .settings-icon:hover{
-        color: #abd1f8;
+
+    .settings-icon:hover {
+      color: #abd1f8;
     }
 
     .activity {
@@ -143,7 +144,6 @@
       color: #333;
       padding: .25rem .5rem;
     }
-
   </style>
   <title>Chat</title>
 </head>
@@ -180,40 +180,50 @@
       <div class="content-container">
 
 
-        
-      </div>
-    </div>
-    <a href="/account">
-    <i class="settings-icon fas fa-cog fa-2x" ></i>
-</a>
-  </div>
 
+      </div>
+
+    </div>
+
+
+    
+
+
+    <a href="/account">
+      <i class="settings-icon fas fa-cog fa-2x"></i>
+    </a>
+  </div>
+  <canvas>
+
+  </canvas>
+  <script src="./spatialisation/data/collisions.js"></script>
+  <script src="./spatialisation/index.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
-  /*  function sendMessage() {
-      var chatContainer = document.getElementById('chat');
-      var messageContainer = document.getElementById('messageContainer');
-      var newMessageContainer = document.createElement('div');
-      newMessageContainer.classList.add('message');
-      var senderName = 'Joe'; // Nom de l'expéditeur (peut être dynamique)
-      newMessageContainer.innerHTML = '<strong>' + senderName + ':</strong> ' + document.querySelector('.send-messages input').value;
-      messageContainer.appendChild(newMessageContainer);
-      document.querySelector('.send-messages input').value = ''; // Efface le champ de texte après l'envoi du message
-    }
-*/
+    /*  function sendMessage() {
+        var chatContainer = document.getElementById('chat');
+        var messageContainer = document.getElementById('messageContainer');
+        var newMessageContainer = document.createElement('div');
+        newMessageContainer.classList.add('message');
+        var senderName = 'Joe'; // Nom de l'expéditeur (peut être dynamique)
+        newMessageContainer.innerHTML = '<strong>' + senderName + ':</strong> ' + document.querySelector('.send-messages input').value;
+        messageContainer.appendChild(newMessageContainer);
+        document.querySelector('.send-messages input').value = ''; // Efface le champ de texte après l'envoi du message
+      }
+  */
     const socket = io('ws://localhost:4111');
 
     const msgInput = document.querySelector('#textMessage')
-    const nameInput = '<%- JSON.stringify(userName) %>'.replaceAll('"','');
+    const nameInput = '<%- JSON.stringify(userName) %>'.replaceAll('"', '');
     const chatRoom = localStorage.getItem('countryName');
     const activity = document.querySelector('.activity')
     const usersList = document.querySelector('.user-list')
     const chatDisplay = document.querySelector('.message')
 
-    socket.emit('enterRoom',{name: nameInput, room: chatRoom})
+    socket.emit('enterRoom', { name: nameInput, room: chatRoom })
 
     document.title = `Chat - ${chatRoom}`;
 
@@ -234,7 +244,7 @@
     }
 
     document.querySelector('.sendMessage')
-            .addEventListener('click', sendMessage)
+      .addEventListener('click', sendMessage)
 
     console.log("ok finish")
     msgInput.addEventListener('keypress', () => {
@@ -255,9 +265,9 @@
       if (name !== nameInput && name !== 'Admin') li.className = 'post post--right'
       if (name !== 'Admin') {
         li.innerHTML = `<div class="post__header ${name === nameInput
-                ? 'post__header--user'
-                : 'post__header--reply'
-        }">
+          ? 'post__header--user'
+          : 'post__header--reply'
+          }">
         <span class="post__header--name">${name}</span>
         <span class="post__header--time">${time}</span>
         </div>
@@ -271,15 +281,15 @@
     })
 
     let activityTimer
-    =socket.on("activity", (name) => {
-      activity.textContent = `${name} is typing...`
+      = socket.on("activity", (name) => {
+        activity.textContent = `${name} is typing...`
 
-      // Clear after 3 seconds
-      clearTimeout(activityTimer)
-      activityTimer = setTimeout(() => {
-        activity.textContent = ""
-      }, 3000)
-    })
+        // Clear after 3 seconds
+        clearTimeout(activityTimer)
+        activityTimer = setTimeout(() => {
+          activity.textContent = ""
+        }, 3000)
+      })
 
     socket.on('userList', ({ users }) => {
       showUsers(users)

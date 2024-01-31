@@ -37,8 +37,8 @@
     </style>
 </head>
 
-<body class="d-flex">
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh;">
+<body class="d-flex" >
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh; ">
         <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
             <img src="images/logo.png" height="50px">
         </a>
@@ -100,8 +100,8 @@
                 </li>
                 <% } %>
         </ul>
-        <hr>
-        <div class="dropdown">
+        <div class="dropdown" style=" position: fixed;
+        bottom: 0; margin-bottom: 10px;">
             <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <% if (isAdmin.isadmin) { %>
@@ -196,55 +196,54 @@
             padding: 15px;
             max-width: 1200px;
         }
+       
+    tr{
+        border-style :hidden;
+    }
     </style>
-        <script>
-            function openEditModal() {
-                // Show the modal
-                $('#editModal').modal('show');
-            }
-    
-            function saveQuery() {
-                // Add logic to save the edited query here
-                // For example, you can retrieve the edited query using $('#query').val()
-                // and perform further actions
-                // After saving, you can close the modal
-                $('#editModal').modal('hide');
-            }
-            function closeQuery() {
-                // Add logic to save the edited query here
-                // For example, you can retrieve the edited query using $('#query').val()
-                // and perform further actions
-                // After saving, you can close the modal
-                $('#editModal').modal('hide');
-            }
-        </script>
-   <div class="modal" tabindex="-1" role="dialog" id="editModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Add your form or input elements for editing queries here -->
-                <label for="query">Nom:</label>
-                <input type="text" id="query" class="form-control">
-                <label for="query">Pays:</label>
-                <input type="text" id="query" class="form-control">
-                <label for="query">Avertissement administrateur:</label>
-                <input type="text" id="query" class="form-control">
+    <script>
+        function openEditModal() {
+            // Show the modal
+            $('#editModal').modal('show');
+        }
 
-            </div>
-          
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="saveQuery()">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeQuery()">Close</button>
+        function saveQuery() {
+
+            $('#editModal').modal('hide');
+        }
+        function closeQuery() {
+
+            $('#editModal').modal('hide');
+        }
+    </script>
+    <div class="modal" tabindex="-1" role="dialog" id="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Add your form or input elements for editing queries here -->
+                    <label for="query">Nom:</label>
+                    <input type="text" id="query" class="form-control">
+                    <label for="query">Pays:</label>
+                    <input type="text" id="query" class="form-control">
+                    <label for="query">Avertissement administrateur:</label>
+                    <input type="text" id="query" class="form-control">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="saveQuery()">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="closeQuery()">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="ui segment">
 
 
@@ -276,50 +275,60 @@
                             <% let endIndex=currentpage * usersPerPage; %>
 
                                 <% Object.keys(userdata).slice(startIndex, endIndex).forEach(userId=> { %>
-                                    <tr>
-                                        <% Object.keys(userdata[userId]).forEach(key=> { %>
-                                            <td>
-                                                <% if (key==='statut' ) { %>
-                                                    <% if (userdata[userId][key]===1) { %>
-                                                        En ligne
-                                                        <% } else if (userdata[userId][key]===2) { %>
-                                                            Ne pas déranger
-                                                            <% } else if (userdata[userId][key]===3) { %>
-                                                                Inactif
-                                                                <% } else if (userdata[userId][key]===4) { %>
-                                                                    Hors Ligne
-                                                                    <% } else { %>
-                                                                        <%= userdata[userId][key] %>
-                                                                            <% } %>
-                                                                                <% } else if (key==='date' ) { %>
-                                                                                    <%= new
-                                                                                        Date(userdata[userId][key]).toLocaleDateString('en-US')
-                                                                                        %>
-                                                                                        <% } else { %>
-                                                                                            <%= userdata[userId][key] %>
-                                                                                                <% } %>
-                                            </td>
-                                            <% }); %>
+                                    <% if (userdata[userId]['username'].trim()===userName.trim()) { 
+                                       } else { %>
+                                                <tr>
+                                                    <% Object.keys(userdata[userId]).forEach(key=> { %>
+                                                        <td>
+                                                            <% if (key==='statut' ) { %>
+                                                                <% if (userdata[userId][key]===1) { %>
+                                                                    En ligne
+                                                                    <% } else if (userdata[userId][key]===2) { %>
+                                                                        Ne pas déranger
+                                                                        <% } else if (userdata[userId][key]===3) { %>
+                                                                            Inactif
+                                                                            <% } else if (userdata[userId][key]===4) {
+                                                                                %>
+                                                                                Hors Ligne
+                                                                                <% } else { %>
+                                                                                    <%= userdata[userId][key] %>
+                                                                                        <% } %>
+                                                                                            <% } else if (key==='date' )
+                                                                                                { %>
+                                                                                                <%= new
+                                                                                                    Date(userdata[userId][key]).toLocaleDateString('en-US')
+                                                                                                    %>
+                                                                                                    <% } else { %>
+                                                                                                        <%= userdata[userId][key]
+                                                                                                            %>
+                                                                                                            <% } %>
+                                                        </td>
+                                                        <% }); %>
 
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                            fill="currentColor" class="bi bi-three-dots dropdown-toggle"
-                                                            data-bs-toggle="dropdown" aria-expanded="false"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                        </svg>
 
-                                                        <ul class="dropdown-menu">
-                                                            <li><a class="dropdown-item" href="#" onclick="openEditModal()">Edit</a></li>
-                                                            <li><a class="dropdown-item" href="#"
-                                                                    style="color: #ff0000;">Ban</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
-                                    </tr>
-                                    <% }); %>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                        height="16" fill="currentColor"
+                                                                        class="bi bi-three-dots dropdown-toggle"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false"
+                                                                        viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                                                    </svg>
+
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a class="dropdown-item" href="#"
+                                                                                onclick="openEditModal()">Edit</a></li>
+                                                                        <li><a class="dropdown-item" href="#"
+                                                                                style="color: #ff0000;">Ban</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                </tr>
+                                                <% }; %>
+                                                    <% }) %>
+
 
 
 
