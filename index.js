@@ -191,9 +191,29 @@ app.post("/adminsignUp/login", async (req, res) => {
     }
 
 });
-app.get('/', (req, res) => {
-    res.redirect('/home');
+app.get('/', async (req, res) => {
+    if (typeof req.session.userEmail == 'undefined') {
+        res.redirect('/home');
+    }
+    else{
+        const userName = req.session.userName;
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+        res.render('account', { userName, isAdmin });
+    }
 });
+
+app.get('/home', async (req, res) => {
+    if (typeof req.session.userEmail == 'undefined') {
+        console.log("New user ")
+        res.render("home", {});
+    }
+    else{
+        const userName = req.session.userName;
+        const isAdmin = await db.isAdmin(req.session.userEmail);
+        res.render('account', { userName, isAdmin });
+    }
+});
+
 
 app.get('/account', async (req, res) => {
     try {
@@ -290,6 +310,8 @@ app.get('/friends', async (req, res) => {
         res.status(500).send('Erreur lors de la récupération des données utilisateur.');
     }
 });
+
+
 
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
