@@ -1,19 +1,13 @@
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
-function fitToContainer(canvas){
-    canvas.style.width='100%';
-    canvas.style.height='100%';
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-fitToContainer(canvas);
 
+canvas.width = 1024;
+canvas.height = 576;
 
 const collisionsMap = []
 for (let i =0;i < collisions.length; i+=32){
     collisionsMap.push(collisions.slice(i,32 + i))
 }
-
 
 
 class Boundary {
@@ -32,8 +26,8 @@ class Boundary {
 const boundaries = []
 
 const offset = {
-    x: 0,
-    y : -1600
+    x: -100,
+    y : -1400
 }
 
 collisionsMap.forEach((row,i) =>{
@@ -186,7 +180,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 3
+                        y: boundary.position.y + 10
                     }
                 }
             })) {
@@ -210,7 +204,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 3
+                        y: boundary.position.y + 10
                     }
                 }
             })) {

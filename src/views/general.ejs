@@ -11,27 +11,37 @@
       margin: 0;
       padding: 0;
       position: relative;
+      overflow: hidden;
+      background-color: #ffffff;
+
     }
 
     .chat-container {
       width: 25%;
       height: 100vh;
-      background-color: #f8f9fa;
       float: left;
       overflow: auto;
       position: relative;
+      background-color: #eeeeee;
+      border-radius: 10px;
+
     }
 
     .content-container {
       width: 75%;
       float: left;
-      padding: 20px;
+      padding: 5px;
+      margin: 0;
     }
 
+    canvas {
+      width: auto;
+      background-color: red;
+    }
 
     .send-messages {
       padding: 10px;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid #ffffff;
       position: absolute;
       bottom: 0;
       width: 100%;
@@ -64,7 +74,10 @@
       word-wrap: break-word;
       text-align: left;
     }
-
+    .container-fluid{
+      padding-left: 0;
+      padding-right: 0;
+    }
     .message strong {
       color: #1da1f2;
     }
@@ -102,6 +115,8 @@
       margin: .5rem;
       overflow: hidden;
       flex-shrink: 0;
+      list-style-type: none;
+
     }
 
     .post--left {
@@ -144,6 +159,10 @@
       color: #333;
       padding: .25rem .5rem;
     }
+
+    .row {
+      margin: 0;
+    }
   </style>
   <title>Chat</title>
 </head>
@@ -152,7 +171,16 @@
 
   <div class="container-fluid">
     <div class="row">
+
       <div class="chat-container" id="chat">
+        <h4
+          style=" color: rgb(0, 0, 0); justify-content: center; align-items: center; display: flex; font-weight: 600; font-family: 'Roboto', sans-serif; margin-bottom: 0; margin-top: 10px;">
+        </h4>
+        <p id="polyglot-chat" style="color: rgb(0, 0, 0);justify-content: center; align-items: center; display: flex; margin: 0; font-size:x-small"></p>
+        <hr/ style="  background-color: #000000;
+        border: .1em solid black;
+        border-radius: 1px 1px 1px 1px;
+        height: .05em;">
         <div class="message-container" id="messageContainer">
           <!-- Nouveaux messages apparaîtront ici -->
 
@@ -188,7 +216,6 @@
     </div>
 
 
-    
 
 
     <a href="/account">
@@ -196,8 +223,8 @@
     </a>
   </div>
 
-<script src="data/collisions.js"></script>
-<script src="index.js"></script>
+  <script src="data/collisions.js"></script>
+  <script src="index.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
@@ -250,6 +277,12 @@
     msgInput.addEventListener('keypress', () => {
       socket.emit('activity', nameInput)
     })
+    socket.on('roomName', room => {
+      // Mise à jour du contenu des éléments <h4> avec le nom de la salle
+      document.querySelector('h4').textContent = `${room}`;
+      document.getElementById('polyglot-chat').textContent = `p/${room}`;
+
+    });
 
     // Listen for messages
     socket.on("message", (data) => {
@@ -268,6 +301,7 @@
           ? 'post__header--user'
           : 'post__header--reply'
           }">
+        
         <span class="post__header--name">${name}</span>
         <span class="post__header--time">${time}</span>
         </div>
