@@ -3,7 +3,7 @@ const c = canvas.getContext('2d');
 
 canvas.width = 1024;
 canvas.height = 576;
-
+canvas.style.borderRadius = '10px'; 
 const collisionsMap = []
 for (let i =0;i < collisions.length; i+=32){
     collisionsMap.push(collisions.slice(i,32 + i))
@@ -93,7 +93,7 @@ class Sprite {
         if (this.frames.max > 1){
             this.frames.elapsed++
         }
-        if (this.frames.elapsed % 10 === 0){
+        if (this.frames.elapsed % 30 === 0){
         if (this.frames.val < this.frames.max - 1)
             this.frames.val++
         else this.frames.val = 0
@@ -180,7 +180,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 10
+                        y: boundary.position.y + 3
                     }
                 }
             })) {
@@ -191,7 +191,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.y += 3;
+            movable.position.y += 1.3;
         });
     } else if (keys.q.pressed && lastKey == 'q') {
         player.moving = true
@@ -204,7 +204,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 10
+                        y: boundary.position.y + 3
                     }
                 }
             })) {
@@ -215,7 +215,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.x += 3;
+            movable.position.x += 1.3;
         });
     } else if (keys.s.pressed && lastKey === 's') {
         player.moving = true
@@ -239,7 +239,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.y -= 3;
+            movable.position.y -= 1.3;
         })
     } else if (keys.d.pressed && lastKey == 'd') {
         player.moving = true
@@ -263,7 +263,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.x -= 3;
+            movable.position.x -= 1.3;
         });
     }
 }
