@@ -270,40 +270,52 @@ function animate(){
 animate()
 
 let lastKey = ''
-window.addEventListener('keydown',(e) =>{
-    switch (e.key){
+function keydownHandler(e) {
+    switch (e.key) {
         case 'z':
-            keys.z.pressed = true
-            lastKey = 'z'
-            break
+            keys.z.pressed = true;
+            lastKey = 'z';
+            break;
         case 'q':
-            keys.q.pressed = true
-            lastKey = 'q'
-            break
+            keys.q.pressed = true;
+            lastKey = 'q';
+            break;
         case 's':
-            keys.s.pressed = true
-            lastKey = 's'
-            break
+            keys.s.pressed = true;
+            lastKey = 's';
+            break;
         case 'd':
-            keys.d.pressed = true
-            lastKey = 'd'
-            break
+            keys.d.pressed = true;
+            lastKey = 'd';
+            break;
     }
-})
+}
 
-window.addEventListener('keyup',(e) =>{
-    switch (e.key){
+function keyupHandler(e) {
+    switch (e.key) {
         case 'z':
-            keys.z.pressed = false
-            break
+            keys.z.pressed = false;
+            break;
         case 'q':
-            keys.q.pressed = false
-            break
+            keys.q.pressed = false;
+            break;
         case 's':
-            keys.s.pressed = false
-            break
+            keys.s.pressed = false;
+            break;
         case 'd':
-            keys.d.pressed = false
-            break
+            keys.d.pressed = false;
+            break;
     }
-})
+}
+
+function addEventListeners() {
+    window.addEventListener('keydown', keydownHandler);
+    window.addEventListener('keyup', keyupHandler);
+}
+
+function removeEventListeners() {
+    window.removeEventListener('keydown', keydownHandler);
+    window.removeEventListener('keyup', keyupHandler);
+}
+
+

@@ -85,11 +85,8 @@
     }
 
     .message {
-      padding: 8px 12px;
-      margin-bottom: 4px;
-      margin-top: 20px;
       margin-left: 10px;
-      border-radius: .4em;
+      border-radius: 10px;
       max-width: 90%;
       word-wrap: break-word;
       text-align: left;
@@ -131,50 +128,51 @@
     }
 
     .post {
-      background-color: #eee;
-      border-radius: 10px;
-      padding: 0 0 .25rem;
-      margin: .5rem;
-      overflow: hidden;
-      flex-shrink: 0;
-      list-style-type: none;
+  background-color: #eee;
+  border-radius: 10px;
+  padding: 0 0 .25rem;
+  margin: .5rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  list-style-type: none;
+}
 
-    }
+.post__header {
+  color: #fff;
+  padding: .25rem .5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+}
 
-    .post--left {
-      width: 60%;
-      align-self: flex-start;
-    }
+.post__header--user {
+  background-color: #007BFF;
+}
 
-    .post--right {
-      width: 60%;
-      align-self: flex-end;
-    }
+.post__header--reply {
+  background-color: #6a6a6a;
+}
 
-    .post__header {
-      color: #fff;
-      padding: .25rem .5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: .5rem;
-    }
+.post__header--name {
+  font-weight: bold;
+}
 
-    .post__header--user {
-      background-color: blue;
-    }
+.post__header--time {
+  font-size: .8rem;
+}
 
-    .post__header--reply {
-      background-color: purple;
-    }
+.post--left {
+  width: 50%;
+  align-self: flex-start;
+  margin-right: auto; /* Pour aligner à gauche */
+}
 
-    .post__header--name {
-      font-weight: bold;
-    }
-
-    .post__header--time {
-      font-size: .8rem;
-    }
+.post--right {
+  width: 50%;
+  align-self: flex-end;
+  margin-left: auto; /* Pour aligner à droite */
+}
 
     .post__text {
       margin-top: 5px;
@@ -206,13 +204,12 @@
     <div class="row">
 
       <div class="chat-container" id="chat">
-        <div style="background-color: #7289da;  margin-bottom: 0;   border-radius: 10px;">
+        <div style="background-color: #007BFF; margin-bottom: 0; border-radius: 10px; display: flex; align-items: center;">
 
-          <h4
-            style=" color: rgb(255, 255, 255); font-weight: 400; font-family: 'Roboto', sans-serif;  padding-top: 20px; padding-left: 20px; font-size: large;">
-          </h4>
-
-          <hr />
+          <h4 style="color: #fff; font-weight: 400; font-family: 'Roboto', sans-serif; padding: 20px 20px 20px 0; margin-left: 20px; margin-top: 7px; font-size: large;">Title</h4>
+          
+          <p id="userCount"  style="color: #fff; font-weight: 200; font-family: 'Roboto', sans-serif; margin-left: auto; padding-right: 20px; font-size: 12px; margin-top: 12px;"></p>
+        
         </div>
         <div class="message-container" id="messageContainer">
           <!-- Nouveaux messages apparaîtront ici -->
@@ -230,11 +227,11 @@
           <p class="user-list"></p>
 
           <div class="send-messages" id="message"
-            style="background-color: #7289da; padding: 15px; border-radius: 10px;">
+            style="background-color: #007BFF; padding: 15px; border-radius: 10px;">
             <input type="text" id="textMessage" placeholder="Saisissez votre message"
               style="background-color: #fff; border-radius: 10px; ; ">
-            <button class="btn sendMessage"
-              style="background-color: #ffffff; border-radius: 10px; color: #7289da;">Envoyer</button>
+            <button class="btn sendMessage" id="button"
+              style="background-color: #ffffff; border-radius: 10px; color: #007BFF;">Envoyer</button>
             <p class="user-list"></p>
           </div>
         </div>
@@ -285,6 +282,8 @@
     const activity = document.querySelector('.activity')
     const usersList = document.querySelector('.user-list')
     const chatDisplay = document.querySelector('.message')
+    const userCountParagraph = document.getElementById('userCount');
+     const  isshow = false;
 
     socket.emit('enterRoom', { name: nameInput, room: chatRoom })
 
@@ -362,14 +361,16 @@
 
     socket.on('userList', ({ users }) => {
       showUsers(users)
+      isshow = true;
     })
 
 
     function showUsers(users) {
       usersList.textContent = ''
-      console.log(chatRoom)
+      console.log(users)
       if (users) {
-        usersList.innerHTML = `<em>Users in ${chatRoom}:</em>`
+        console.log(users.length)
+        userCountParagraph.textContent = users.length + 1 + ' user(s) online';
         users.forEach((user, i) => {
           usersList.textContent += ` ${user.name}`
           if (users.length > 1 && i !== users.length - 1) {
@@ -378,6 +379,50 @@
         })
       }
     }
+
+    const text = document.querySelector('input[type="text"]');
+    const button = document.getElementById('button');
+    text.addEventListener('click', function () {
+      // Remove event listeners
+      removeEventListeners();
+
+      // Add event listeners when the element is clicked
+      button.addEventListener('click', function () {
+        addEventListeners();
+      }, { once: true });
+      text.addEventListener('blur', function () {
+        addEventListeners();
+      }, { once: true });
+      document.addEventListener('keypress', function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          button.click();
+          addEventListeners();
+
+        }
+      }, { once: true });
+
+    });
+    document.addEventListener('keypress', function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          button.click();
+          addEventListeners();
+
+        }
+    })
+
+    addEventListeners();
+    if (!isshow){
+      userCountParagraph.textContent = 1 + ' user(s) online';
+
+    }
+  
+
+
+
+
+
 
   </script>
 
