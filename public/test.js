@@ -200,7 +200,7 @@ class Sprite {
 const player = new Sprite({
     position: {
         x: canvas.width / 2 - 192 / 4,
-        y: canvas.height / 2 - 68 / 2
+        y:  canvas.width / 2 - 192 / 4
     },
     image: joueur,
     frames: {
