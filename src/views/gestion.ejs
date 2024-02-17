@@ -37,7 +37,7 @@
     </style>
 </head>
 
-<body class="d-flex" >
+<body class="d-flex">
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 250px; height: 100vh; ">
         <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
             <img src="images/logo.png" height="50px">
@@ -196,10 +196,10 @@
             padding: 15px;
             max-width: 1200px;
         }
-       
-    tr{
-        border-style :hidden;
-    }
+
+        tr {
+            border-style: hidden;
+        }
     </style>
     <script>
         function openEditModal() {
@@ -275,59 +275,56 @@
                             <% let endIndex=currentpage * usersPerPage; %>
 
                                 <% Object.keys(userdata).slice(startIndex, endIndex).forEach(userId=> { %>
-                                    <% if (userdata[userId]['username'].trim()===userName.trim()) { 
-                                       } else { %>
-                                                <tr>
-                                                    <% Object.keys(userdata[userId]).forEach(key=> { %>
-                                                        <td>
-                                                            <% if (key==='statut' ) { %>
-                                                                <% if (userdata[userId][key]===1) { %>
-                                                                    En ligne
-                                                                    <% } else if (userdata[userId][key]===2) { %>
-                                                                        Ne pas déranger
-                                                                        <% } else if (userdata[userId][key]===3) { %>
-                                                                            Inactif
-                                                                            <% } else if (userdata[userId][key]===4) {
-                                                                                %>
-                                                                                Hors Ligne
-                                                                                <% } else { %>
-                                                                                    <%= userdata[userId][key] %>
-                                                                                        <% } %>
-                                                                                            <% } else if (key==='date' )
-                                                                                                { %>
-                                                                                                <%= new
-                                                                                                    Date(userdata[userId][key]).toLocaleDateString('en-US')
+                                    <% if (userdata[userId]['username'].trim()===userName.trim()) { } else { %>
+                                        <tr>
+                                            <% Object.keys(userdata[userId]).forEach(key=> { %>
+                                                <td>
+                                                    <% if (key==='statut' ) { %>
+                                                        <% if (userdata[userId][key]===1) { %>
+                                                            En ligne
+                                                            <% } else if (userdata[userId][key]===2) { %>
+                                                                Ne pas déranger
+                                                                <% } else if (userdata[userId][key]===3) { %>
+                                                                    Inactif
+                                                                    <% } else if (userdata[userId][key]===4) { %>
+                                                                        Hors Ligne
+                                                                        <% } else { %>
+                                                                            <%= userdata[userId][key] %>
+                                                                                <% } %>
+                                                                                    <% } else if (key==='date' ) { %>
+                                                                                        <%= new
+                                                                                            Date(userdata[userId][key]).toLocaleDateString('en-US')
+                                                                                            %>
+                                                                                            <% } else { %>
+                                                                                                <%= userdata[userId][key]
                                                                                                     %>
-                                                                                                    <% } else { %>
-                                                                                                        <%= userdata[userId][key]
-                                                                                                            %>
-                                                                                                            <% } %>
-                                                        </td>
-                                                        <% }); %>
+                                                                                                    <% } %>
+                                                </td>
+                                                <% }); %>
 
 
-                                                            <td>
-                                                                <div class="dropdown">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" fill="currentColor"
-                                                                        class="bi bi-three-dots dropdown-toggle"
-                                                                        data-bs-toggle="dropdown" aria-expanded="false"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                                                    </svg>
+                                                    <td>
+                                                        <div class="dropdown">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-three-dots dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                                            </svg>
 
-                                                                    <ul class="dropdown-menu">
-                                                                        <li><a class="dropdown-item" href="#"
-                                                                                onclick="openEditModal()">Edit</a></li>
-                                                                        <li><a class="dropdown-item" href="#"
-                                                                                style="color: #ff0000;">Ban</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                </tr>
-                                                <% }; %>
-                                                    <% }) %>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href="#"
+                                                                        onclick="openEditModal()">Edit</a></li>
+                                                                <li><a class="dropdown-item" href="#"
+                                                                        style="color: #ff0000;">Ban</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                        </tr>
+                                        <% }; %>
+                                            <% }) %>
 
 
 
@@ -335,111 +332,43 @@
             </tbody>
 
         </table>
-        <div id="pag-cover">
-            <div id="pg-links">
-                <div class="td arr-cover">
-                    <div class="arrow" id="l-arrow"><i class="gg-arrow-left-r"></i></div>
-                </div>
-                <div class="td">
-                    <div id="links">
-                        <% const totalPages=Math.ceil(Object.keys(userdata).length / 15); %>
-                            <% const currentpa=1; %>
-                                <% const startPage=Math.max(1, currentpa - 1); %>
-                                    <% const endPage=Math.min(totalPages, startPage + 2); %>
-                                        <% for (let page=startPage; page <=endPage; page++) { %>
-                                            <div class="pg-link" onclick="goToPage(this)"><span>
-                                                    <%= page %>
-                                                </span></div>
-                                            <% } %>
-                    </div>
-                </div>
-                <div class="td arr-cover">
-                    <div class="arrow" id="r-arrow" style="color: white;"><i class="gg-arrow-right-r"></i></div>
-                </div>
-            </div>
+    
+         
+        <ul class="pagination" style="justify-content: center;">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <% const totalPages = Math.ceil(Object.keys(userdata).length / 15); %>
+            <% const mypage = 1; %>
+            <% const startPage = Math.max(1, mypage - 1); %>
+            <% const endPage = Math.min(totalPages, startPage + 2); %>
+            <% for (let page = startPage; page <= endPage; page++) { %>
+                <li class="page-item">
+                    <a class="page-link" href="#" onclick="goToPage(<%= page %>)">
+                        <%= page %>
+                    </a>
+                </li>
+            <% } %>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
         </div>
-
-    </div>
-    <script>
-        function goToPage(element) {
-            // Extract the value of the span inside the clicked element
-            const page = parseInt(element.querySelector('span').innerText);
-            console.log('Navigating to page', page);
-
-            // Add logic to update the URL with the selected page
-            const url = new URL(window.location.href);
-            url.searchParams.set('page', page);
-            window.location.href = url.href;
-        }
-    </script>
-    <script>
-        $(function () {
-            var pg_links = $(".pg-link"),
-                h_elm = $("#m-pg-link"),
-                curr = 1,
-                _this,
-                _class,
-                _id,
-                __this,
-                _num,
-                i = 0;
-
-            function changeNumbers(flag) {
-                if ((curr > 2 && flag == 0) || flag) {
-                    if (curr == 1) {
-                        curr = 2;
-                        h_elm.removeClass("left");
-                        return;
-                    }
-
-                    $(pg_links).each(function () {
-                        __this = $(this).find("span");
-                        _num = parseInt(__this.text());
-
-                        if (flag) _num += 1;
-                        else _num -= 1;
-
-                        ++i;
-
-                        pg_links.addClass("s-hide");
-
-                        __this.text(_num);
-
-                        setTimeout(function () {
-                            pg_links.removeClass("s-hide");
-                        }, 150);
-
-                        if (i == 2) curr = _num;
-                    });
-
-                    i = 0;
-                } else {
-                    if (curr == 2 && flag == 0) {
-                        curr = 1;
-                        h_elm.addClass("left");
-                    }
-                }
+        <script>
+            function goToPage(page) {
+                console.log('Navigating to page', page);
+        
+                // Add logic to update the URL with the selected page
+                const url = new URL(window.location.href);
+                url.searchParams.set('page', page);
+                window.location.href = url.href;
             }
-
-            function changeLinks() {
-                _this = $(this);
-                _class = _this.attr("class").trim().toLowerCase();
-
-                if (_class == "arrow") {
-                    _id = _this.attr("id").trim().toLowerCase();
-
-                    if (_id == "l-arrow") changeNumbers(0);
-                    else changeNumbers(1);
-                } else {
-                    if (parseInt(_this.text().trim()) < curr) changeNumbers(0);
-                    else changeNumbers(1);
-                }
-            }
-
-            $(".pg-link,.arrow").on("click", changeLinks);
-        });
-
-    </script>
+        </script>
+        
 
 
 
