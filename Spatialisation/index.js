@@ -4,11 +4,13 @@ const c = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
-const collisionsMap = []
-for (let i =0;i < collisions.length; i+=32){
-    collisionsMap.push(collisions.slice(i,32 + i))
-}
+// Define speed
+let speed = 9; // You can modify this value to change the speed
 
+const collisionsMap = []
+for (let i = 0; i < collisions.length; i += 32) {
+    collisionsMap.push(collisions.slice(i, 32 + i))
+}
 
 class Boundary {
     constructor({position}){
@@ -180,7 +182,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 3
+                        y: boundary.position.y + speed
                     }
                 }
             })) {
@@ -191,7 +193,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.y += 3;
+            movable.position.y += speed;
         });
     } else if (keys.q.pressed && lastKey == 'q') {
         player.moving = true
@@ -204,7 +206,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y + 3
+                        y: boundary.position.y + speed
                     }
                 }
             })) {
@@ -215,7 +217,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.x += 3;
+            movable.position.x += speed;
         });
     } else if (keys.s.pressed && lastKey === 's') {
         player.moving = true
@@ -228,7 +230,7 @@ function animate(){
                     ...boundary,
                     position: {
                         x: boundary.position.x,
-                        y: boundary.position.y - 3
+                        y: boundary.position.y - speed
                     }
                 }
             })) {
@@ -239,7 +241,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.y -= 3;
+            movable.position.y -= speed;
         })
     } else if (keys.d.pressed && lastKey == 'd') {
         player.moving = true
@@ -251,7 +253,7 @@ function animate(){
                 rectangle2: {
                     ...boundary,
                     position: {
-                        x: boundary.position.x -3,
+                        x: boundary.position.x -speed,
                         y: boundary.position.y
                     }
                 }
@@ -263,7 +265,7 @@ function animate(){
         }
         if (moving)
         movables.forEach((movable) => {
-            movable.position.x -= 3;
+            movable.position.x -= speed;
         });
     }
 }

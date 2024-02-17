@@ -52,12 +52,12 @@ function displayPlayersOnScreen(cameraX, cameraY) {
     }
 }
 
-function gameLoop() {
+function gameLoop(playerId) {
     const cameraPosition = calculateCameraPosition(player.position.x, player.position.y);
     const playerPositionsRelativeToCamera = calculatePlayerPositionsRelativeToCamera(player.position.x, player.position.y, cameraPosition.x, cameraPosition.y);
     updatePlayerPositionsInFirebase(playerId,playerPositionsRelativeToCamera.x, playerPositionsRelativeToCamera.y);
     displayPlayersOnScreen( cameraPosition.x, cameraPosition.y);
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop(playerId));
 }
 
 function waitForCurrentUser(callback) {
@@ -84,7 +84,7 @@ waitForCurrentUser((user) => {
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         const playerId = user.uid;
-        gameLoop();
+        gameLoop(playerId);
         console.log("Authenticated Sucessfully")
     } else {
         console.log("No authenticated user found. Please log in or sign up.");

@@ -19,12 +19,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
-
-
-
-canvas.width = 1524;
-canvas.height = 876;
-canvas.style.borderRadius = '10px';
+canvas.width = 2048 / 1.445;
+canvas.height = 2048 / 2.5 ;
 const collisionsMap = []
 for (let i = 0; i < collisions.length; i += 32) {
     collisionsMap.push(collisions.slice(i, 32 + i))
@@ -61,9 +57,8 @@ collisionsMap.forEach((row, i) => {
     })
 })
 
-
 const image = new Image();
-image.src = './images/mapFrance.png';
+image.src = './images/mapfrancegood.png';
 const joueur = new Image()
 joueur.src = './images/playerDown.png'
 const joueurHaut = new Image()
@@ -72,7 +67,6 @@ const joueurDroite = new Image()
 joueurDroite.src = './images/playerRight.png'
 const joueurGauche = new Image()
 joueurGauche.src = './images/playerLeft.png'
-
 
 class Sprite {
     constructor({ position, image, frames = { max: 1 }, sprites }) {
@@ -129,7 +123,6 @@ class Sprite {
         }
     }
 }
-
 
 const player = new Sprite({
 
@@ -191,12 +184,11 @@ function rectangularCollision({ rectangle1, rectangle2 }) {
 function updatePlayerLocation(playerId, playerX, playerY, playerdirection) {
 
     database.ref('players/' + playerId).set({
+        direction: playerdirection,
         x: playerX,
-        y: playerY,
-        direction: playerdirection
+        y: playerY
     });
 }
-
 
 firebase.auth().signInAnonymously().catch((error) => {
     var errorCode = error.code;
@@ -204,12 +196,8 @@ firebase.auth().signInAnonymously().catch((error) => {
     console.error(errorCode, errorMessage);
 });
 
-
 let allPlayers = [];
-
 let playerSprites = {};
-
-
 
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -229,84 +217,77 @@ firebase.auth().onAuthStateChanged((user) => {
                 const uid = childSnapshot.key;
                 const playerData = childSnapshot.val();
                 if (uid !== playerId) {
-                    updateOrCreatePlayerSprite(uid, playerData);
-                    gameLoop()
-                    
+                    gameLoop();  
                 }
-            });
-          
+            }); 
         });
-        playersRef.on('value', (snapshot) => {
-            const playerData = snapshot.val();
-            if (playerData) {
-                updateOrCreatePlayerSprite(playerId, playerData);
-                gameLoop()
-            }
-        });
-    } else {
-        
+    } else {   
     }
 });
 
 function gameLoop() {
     drawOtherPlayers(); 
-    requestAnimationFrame(drawOtherPlayers);
-
 }
-
 
 function drawOtherPlayers() {
-    for (const uid in allPlayers) {
-        if (uid !== firebase.auth().currentUser.uid) {
-            const playerData = allPlayers[uid];
-            updateOrCreatePlayerSprite(uid, playerData);
-            console.log("TEST")
-        }
-    }
-    
+    const playersRef = firebase.database().ref('players');
+    playersRef.on('value', (snapshot) => {
+        snapshot.forEach((childSnapshot) => {
+            const uid = childSnapshot.key;
+            const playerData = childSnapshot.val();
+            if (uid !== firebase.auth().currentUser.uid) {
+                setInterval(updateOrCreatePlayerSprite(uid, playerData),50);
+            }
+        }); 
+    });
 }
-
-
 
 function updateOrCreatePlayerSprite(uid, playerData) {
     const { x, y, direction } = playerData;
-    let sprite = playerSprites[uid];
 
-    if (!sprite) {
-        console.log("TEST3")
+    // Check if direction exists in playerData
+    if (x !== undefined && y !== undefined && direction !== undefined) {
+        let sprite = playerSprites[uid];
 
-        sprite = createPlayerSprite(uid,x, y, direction);
-        playerSprites[uid] = sprite;
+        if (!sprite) {
+            sprite = createPlayerSprite(uid, x, y, direction);
+            playerSprites[uid] = sprite;
+        } else {
+            sprite.position.x = x;
+            sprite.position.y = y;
+            sprite.direction = direction;
+            sprite.moving = false;
+            sprite.image = sprite.sprites[direction] || sprite.sprites.down;
+            sprite.draw();
+        }
     } else {
-        console.log("TEST2")
-
-        sprite.position.x = x;
-        sprite.position.y = y;
-        sprite.direction = direction;
-        sprite.moving = false;
-        sprite.image = sprite.sprites[direction] || sprite.sprites.down;
-        sprite.draw();
+        console.error(`Invalid player data for player ${uid}`);
     }
 }
 
 function createPlayerSprite(uid, x, y, direction) {
-    const sprite = new Sprite({
-        position: { x, y },
-        image: joueur,
-        frames: { max: 4 },
-        sprites: {
-            up: joueurHaut,
-            left: joueurGauche,
-            right: joueurDroite,
-            down: joueur
-        }
-    });
-    sprite.direction = direction || 'down';
-    sprite.image = sprite.sprites[sprite.direction];
-    sprite.moving = true;
-    return sprite;
+    // Check if direction is defined
+    if (direction !== undefined) {
+        const sprite = new Sprite({
+            position: { x, y },
+            image: joueur,
+            frames: { max: 4 },
+            sprites: {
+                up: joueurHaut,
+                left: joueurGauche,
+                right: joueurDroite,
+                down: joueur
+            }
+        });
+        sprite.direction = direction || 'down';
+        sprite.image = sprite.sprites[sprite.direction];
+        sprite.moving = true;
+        return sprite;
+    } else {
+        console.error(`Invalid direction for player ${uid}`);
+        return null; // Return null if direction is undefined
+    }
 }
-
 
 function drawPlayerSprite(x, y, direction) {
     const sprite = new Sprite({
@@ -349,67 +330,59 @@ function drawPlayerSprite(x, y, direction) {
             break;
     }
     sprite.moving = true;
-
-
-
     return sprite;
 }
-
-
 
 function animate() {
     window.requestAnimationFrame(animate);
     const cameraOffsetX = canvas.width / 2 - player.position.x;
     const cameraOffsetY = canvas.height / 2 - player.position.y;
-    if (player.direction !== 'right' || player.direction !== 'left' || player.direction !== 'up' || player.direction !== 'down') {
-        player.direction = 'down';
-    }
-    c.save();
-/*     c.translate(cameraOffsetX, cameraOffsetY);
- */    background.draw();
+    c.clearRect(0, 0, canvas.width, canvas.height); 
+    background.draw();
     boundaries.forEach((boundary) => {
         boundary.draw();
     });
-    if (keys.z.pressed && lastKey === 'z') {
-        player.direction = 'up';
-        player.image = player.sprites.up;
-    } else if (keys.q.pressed && lastKey === 'q') {
-        player.direction = 'left';
-        player.image = player.sprites.left;
-    } else if (keys.s.pressed && lastKey === 's') {
-        player.direction = 'down';
-        player.image = player.sprites.down;
-    } else if (keys.d.pressed && lastKey === 'd') {
-        player.direction = 'right';
-        player.image = player.sprites.right;
-    }
-    player.draw();
-    c.restore();
+
+    // Check key presses and update player movement
     let moving = true;
     player.moving = false;
 
     let playerX = player.position.x;
     let playerY = player.position.y;
-    if (keys.z.pressed && lastKey === 'z') {
+    player.direction = "down";
+    if (keys.z.pressed ) {
+        player.direction = 'up';
+        player.image = player.sprites.up;
+    } else if (keys.q.pressed ) {
+        player.direction = 'left';
+        player.image = player.sprites.left;
+    } else if (keys.s.pressed ) {
+        player.direction = 'down';
+        player.image = player.sprites.down;
+    } else if (keys.d.pressed) {
+        player.direction = 'right';
+        player.image = player.sprites.right;
+    }
+    // Handle key presses for player movement
+    if (keys.z.pressed) {
         playerY -= 1.3;
         player.moving = true;
         player.image = player.sprites.up;
-    } else if (keys.q.pressed && lastKey === 'q') {
+    } else if (keys.q.pressed) {
         playerX -= 1.3;
         player.moving = true;
-
         player.image = player.sprites.left;
-    } else if (keys.s.pressed && lastKey === 's') {
+    } else if (keys.s.pressed) {
         playerY += 1.3;
         player.moving = true;
-
         player.image = player.sprites.down;
-    } else if (keys.d.pressed && lastKey === 'd') {
+    } else if (keys.d.pressed) {
         playerX += 1.3;
         player.moving = true;
-
         player.image = player.sprites.right;
     }
+
+    // Check for collisions with boundaries
     for (let i = 0; i < boundaries.length; i++) {
         const boundary = boundaries[i];
         if (rectangularCollision({
@@ -421,28 +394,29 @@ function animate() {
             break;
         }
     }
+
+    // Update player position if no collision
     if (moving) {
         player.position.x = playerX;
         player.position.y = playerY;
-        if (!firebase.auth().currentUser) {
-            return;
+
+        // Update player location in the database
+        if (firebase.auth().currentUser) {
+            const playerId = firebase.auth().currentUser.uid;
+            updatePlayerLocation(playerId, player.position.x, player.position.y, player.direction);
         }
 
-        const playerId = firebase.auth().currentUser.uid;
-        updatePlayerLocation(playerId, player.position.x, player.position.y, player.direction);
+        // Move other elements if needed
         movables.forEach((movable) => {
-            movable.position.x += 0;
+            movable.position.x += 0; // Adjust if needed
         });
     }
+
+    // Draw the player sprite
+    player.draw();
 }
-animate()
-
-
 
 let lastKey = ''
-
-
-
 function keydownHandler(e) {
     switch (e.key) {
         case 'z':
@@ -463,6 +437,7 @@ function keydownHandler(e) {
             break;
     }
 }
+
 function keyupHandler(e) {
     switch (e.key) {
         case 'z':
@@ -479,11 +454,15 @@ function keyupHandler(e) {
             break;
     }
 }
+
 function addEventListeners() {
     window.addEventListener('keydown', keydownHandler);
     window.addEventListener('keyup', keyupHandler);
 }
+
 function removeEventListeners() {
     window.removeEventListener('keydown', keydownHandler);
     window.removeEventListener('keyup', keyupHandler);
 }
+// Start the animation loop
+animate();
